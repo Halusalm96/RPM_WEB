@@ -1,16 +1,37 @@
 <?php
 session_start(); // 세션 시작
 
-// 세션에 저장된 사용자 정보 삭제
-unset($_SESSION['loggedin']);
-unset($_SESSION['email']);
-unset($_SESSION['username']);
-unset($_SESSION['role']);
+include "../db_conn.php"; // 데이터베이스 연결 설정
 
-// 세션 종료
-session_destroy();
+// 세션에 저장된 이메일을 가져옴
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
 
-// 로그아웃 후 메인 페이지로 리다이렉트 또는 다른 처리
-header('Location: /index.html');
-exit;
+    // 데이터베이스에서 사용자의 role을 '직원'으로 업데이트
+    $logoutSql = "UPDATE users SET role='직원' WHERE email='$email'";
+
+    if ($conn->query($logoutSql) === TRUE) {
+        // 업데이트 성공 시
+        // 세션에 저장된 사용자 정보 삭제
+        unset($_SESSION['loggedin']);
+        unset($_SESSION['email']);
+        unset($_SESSION['username']);
+        unset($_SESSION['role']);
+
+        // 세션 파기
+        session_destroy();
+
+        // 로그아웃 후 메인 페이지로 리다이렉트 또는 다른 처리
+        header('Location: /index.html');
+        exit;
+    } else {
+        // 업데이트 실패 시 처리
+        echo "<script>alert('로그아웃 실패'); window.location.href = '/index.html';</script>";
+        exit;
+    }
+} else {
+    // 세션에 이메일이 없는 경우 처리
+    echo "<script>alert('세션에 사용자 정보가 없습니다.'); window.location.href = '/index.html';</script>";
+    exit;
+}
 ?>

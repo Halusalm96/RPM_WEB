@@ -1,3 +1,7 @@
+<?php
+include "../auth_check.php";
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -33,7 +37,9 @@
             display: none;
         }
     </style>
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="../modal.js"></script>
 	<script>
         $(document).ready(function(){
             function updateRobotPosition() {

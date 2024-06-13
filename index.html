@@ -1,3 +1,6 @@
+<?php
+include "auth.php";?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,6 +88,14 @@
           <input type="password" id="password" name="password" required>
         </div>
       </div>
+      <!-- 관리자 코드 입력란 -->
+      <div class="form-group">
+        <div class="input-row">
+          <label for="admin_code" class="input-label">Admin Code:</label>
+          <input type="text" id="admin_code" name="admin_code">
+        </div>
+      </div>
+
       <input type="submit" value="로그인">
       <div class="register-link">
         <a href="/login/join_page.html">회원가입</a> <!-- | <a href="forgot.html">아이디/비밀번호 찾기</a> -->
