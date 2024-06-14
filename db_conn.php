@@ -1,6 +1,6 @@
 <?php
 // DB 연결 정보
-$servername = "http://rpm-web.p-e.kr/";
+$servername = "13.124.83.151";
 $username = "root";
 $password = "1235";
 $dbname = "rpm";
