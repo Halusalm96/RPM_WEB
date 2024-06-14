@@ -88,7 +88,7 @@ session_start();
     <div class="login-link">
       <?php
       if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-          echo '<p>' . $_SESSION['username'] . '님 (' . $_SESSION['role'] . ') <a href="logout.php"><img src="logout_icon.png" alt="로그아웃"></a></p>';
+          echo '<p>' . $_SESSION['manager_name'] . '님 (' . $_SESSION['role'] . ') <a href="logout.php"><img src="logout_icon.png" alt="로그아웃"></a></p>';
       } else {
           echo '<a href="/index.html"><img src="login_icon.png" alt="로그인"></a>';
       }
