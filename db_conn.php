@@ -1,8 +1,8 @@
 <?php
 // DB 연결 정보
-$servername = "192.168.0.118";
-$username = "rpm";
-$password = "11223344";
+$servername = "http://rpm-web.p-e.kr/";
+$username = "root";
+$password = "1235";
 $dbname = "rpm";
 
 // DB 연결
