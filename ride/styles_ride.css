@@ -1,0 +1,143 @@
+/* styles_ride.css */
+
+/* 전체 body 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center; /* 모든 내용을 가운데 정렬 */
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+/* 컨테이너 스타일 */
+.container {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 헤더 스타일 */
+.header {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 테이블 컨테이너 스타일 */
+.scroll {
+  width: 100%;
+  max-height: 400px; /* 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤 활성화 */
+  overflow-x: auto; /* 세로 스크롤 활성화 */
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 테이블 스타일 */
+table {
+  border-collapse: collapse;
+  width: 100%; /* 표 전체 너비 설정 */
+  padding: 10px; /* 표 양쪽 여백 추가 */
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+th {
+  background-color: #e0e0e0;
+}
+
+/* 추가 버튼 스타일 */
+.add-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+.add-button img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* 수정 버튼 스타일 */
+.edit-button img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* 입력 폼 스타일 */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-bottom: 20px;
+}
+
+.input-label {
+  font-size: 18px;
+  margin-right: 10px;
+  flex-basis: 150px; /* 라벨 너비 조정 */
+  white-space: nowrap;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  flex: 1;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  background-color: white;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}

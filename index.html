@@ -1,98 +1,32 @@
-<?php
-include "auth.php";?>
-
 <!DOCTYPE html>
-<html>
+<html lang="ko"> <!-- lang 속성 추가 -->
 <head>
   <meta charset="UTF-8">
-  <title>로그인</title>
-  <style>
-    /* 스타일링을 위한 CSS 코드 */
-    body {
-      font-family: Arial, sans-serif;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 400px;
-      height: 400px;
-      border: 1px solid #ccc;
-      background-color: #f4f4f4;
-    }
-    h2 {
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    .form-group {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .input-row {
-      display: flex;
-      align-items: center;
-    }
-    .input-label {
-      font-size: 18px;
-      margin-right: 10px;
-    }
-    input[type="text"],
-    input[type="password"] {
-      flex: 1;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-    }
-    .register-link {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 16px;
-      color: #888;
-    }
-    .register-link a {
-      text-decoration: none;
-      color: #888;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- viewport 설정 추가 -->
+  <title>RPM 로봇 관제 시스템</title>
+  <link rel="stylesheet" href="styles_common.css">
 </head>
 <body>
   <div class="container">
-    <h2>RPB 관제 시스템</h2>
+    <h2>로그인</h2>
     <form action="/login/login.php" method="post">
       <div class="form-group">
         <div class="input-row">
-          <label for="manager_id" class="input-label">ID:</label>
+          <label for="manager_id" class="input-label">아이디 :</label>
           <input type="text" id="manager_id" name="manager_id" required>
         </div>
       </div>
       <div class="form-group">
         <div class="input-row">
-          <label for="manager_pw" class="input-label">Password:</label>
+          <label for="manager_pw" class="input-label">비밀번호 :</label>
           <input type="password" id="manager_pw" name="manager_pw" required>
         </div>
       </div>
       <!-- 관리자 코드 입력란 -->
       <div class="form-group">
         <div class="input-row">
-          <label for="admin_code" class="input-label">Admin Code:</label>
-          <input type="text" id="admin_code" name="admin_code">
+          <label for="admin_code" class="input-label">관리자코드 :</label>
+          <input type="password" id="admin_code" name="admin_code">
         </div>
       </div>
 

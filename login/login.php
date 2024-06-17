@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $manager_pw = $_POST['manager_pw'];
 
     // Prepared Statement 사용
-    $sql = "SELECT manager_no, manager_id, manager_name, manager_pw, role FROM manager WHERE manager_id=?";
+    $sql = "SELECT manager_key, manager_id, manager_name, manager_pw, role FROM manager WHERE manager_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $manager_id);
     $stmt->execute();
@@ -28,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             // 역할 업데이트
-            $updateSql = "UPDATE manager SET role=? WHERE manager_no=?";
+            $updateSql = "UPDATE manager SET role=? WHERE manager_key=?";
             $stmtUpdate = $conn->prepare($updateSql);
-            $stmtUpdate->bind_param("si", $newRole, $row['manager_no']);
+            $stmtUpdate->bind_param("si", $newRole, $row['manager_key']);
             if ($stmtUpdate->execute()) {
                 // 세션에 사용자 정보 저장
                 $_SESSION['loggedin'] = true;

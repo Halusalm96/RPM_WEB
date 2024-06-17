@@ -1,7 +1,9 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
+include "../auth_check.php";
 include "../db_conn.php";
 
-// ë°ì´í„°ë² ì´ìŠ¤ì—ì„œ ë¡œë´‡ ìœ„ì¹˜ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ëŠ” ì¿¼ë¦¬
+// µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ ·Îº¿ À§Ä¡ Á¤º¸¸¦ °¡Á®¿À´Â Äõ¸®
 $sql = "SELECT robot_x, robot_y, status FROM robot WHERE robot_key = 1";
 $result = $conn->query($sql);
 
@@ -13,16 +15,16 @@ if ($result->num_rows > 0) {
     $response['robot'] = array(
         'robot_x' => $row['robot_x'],
         'robot_y' => $row['robot_y'],
-        'robot_status' => $row['robot_status']
+        'robot_status' => $row['status']
     );
 } else {
     $response['success'] = false;
 }
 
-// JSON í˜•ì‹ìœ¼ë¡œ ë°ì´í„° ë°˜í™˜
-header('Content-Type: application/json');
+// JSON Çü½ÄÀ¸·Î µ¥ÀÌÅÍ ¹ÝÈ¯
+header('Content-Type: application/json; charset=utf-8');
 echo json_encode($response);
 
-// ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²° ë‹«ê¸°
+// µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á ´Ý±â
 $conn->close();
 ?>

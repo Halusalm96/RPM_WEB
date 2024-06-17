@@ -4,7 +4,7 @@ include "../db_conn.php";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $manager_id = $_POST['manager_id'];
 
-  $sql = "SELECT manager_id FROM manager WHERE manager_id='$manager_id'";
+  $sql = "SELECT manager_id FROM manager WHERE manager_key='$manager_key'";
   $result = $conn->query($sql);
 
   if (mysqli_num_rows($result)) {
