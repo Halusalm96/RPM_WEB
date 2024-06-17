@@ -1,9 +1,6 @@
-/* styles_ride.css */
-
-/* 전체 body 스타일 */
 body {
   font-family: Arial, sans-serif;
-  text-align: center; /* 모든 내용을 가운데 정렬 */
+  text-align: center;
   height: 100vh;
   width: 100%;
   display: flex;
@@ -14,7 +11,6 @@ body {
   background-color: #f0f0f0;
 }
 
-/* 컨테이너 스타일 */
 .container {
   position: relative;
   width: 90%;
@@ -31,7 +27,6 @@ body {
   align-items: center;
 }
 
-/* 헤더 스타일 */
 .header {
   width: 100%;
   background-color: #ffffff;
@@ -41,23 +36,21 @@ body {
   margin-bottom: 20px;
 }
 
-/* 테이블 컨테이너 스타일 */
 .scroll {
   width: 100%;
-  max-height: 400px; /* 최대 높이 설정 */
-  overflow-y: auto; /* 세로 스크롤 활성화 */
-  overflow-x: auto; /* 세로 스크롤 활성화 */
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
   background-color: #f0f0f0;
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* 테이블 스타일 */
 table {
   border-collapse: collapse;
-  width: 100%; /* 표 전체 너비 설정 */
-  padding: 10px; /* 표 양쪽 여백 추가 */
+  width: 100%;
+  padding: 10px;
 }
 
 th, td {
@@ -70,7 +63,6 @@ th {
   background-color: #e0e0e0;
 }
 
-/* 추가 버튼 스타일 */
 .add-button {
   position: absolute;
   top: 10px;
@@ -84,14 +76,12 @@ th {
   cursor: pointer;
 }
 
-/* 수정 버튼 스타일 */
 .edit-button img {
   width: 30px;
   height: 30px;
   cursor: pointer;
 }
 
-/* 입력 폼 스타일 */
 .form-group {
   margin-bottom: 20px;
   text-align: left;
@@ -107,7 +97,7 @@ th {
 .input-label {
   font-size: 18px;
   margin-right: 10px;
-  flex-basis: 150px; /* 라벨 너비 조정 */
+  flex-basis: 150px;
   white-space: nowrap;
 }
 

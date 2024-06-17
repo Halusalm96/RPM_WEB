@@ -46,6 +46,7 @@ include "../auth_check.php";
                     alert('놀이기구가 추가되었습니다.');
                     loadTable();
                     $('.add-form').hide();
+                    window.location.replace('index.php'); // 다른 페이지로 이동
                 },
                 error: function() {
                     alert('놀이기구 추가에 실패했습니다.');

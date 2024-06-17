@@ -1,5 +1,5 @@
 <?php
-include "../auth_check.php";
+include "/auth_check.php";
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -7,7 +7,7 @@ include "../auth_check.php";
     <meta charset="UTF-8">
     <title>놀이공원 관리 시스템</title>
     <link rel="stylesheet" href="styles_ride.css">
-    <link rel="stylesheet" href="/styles_back.css">
+    <link rel="stylesheet" href="/styles_home.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -29,13 +29,14 @@ include "../auth_check.php";
         });
     </script>
 </head>
+<script src="../modal.js"></script>
 <body>
     <div class="container">
         <div class="header">
             <h1>놀이공원 관리 시스템</h1>
         </div>
-        <div class="back-button">
-            <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
+        <div class="home-button">
+            <img src="./icon/home.png" alt="메인화면" onclick="location.href='/login/main_page.php'">
         </div>
         <div class="add-button">
             <img src="./icon/plus.png" alt="추가" onclick="location.href='add_page.php'">

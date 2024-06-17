@@ -1,52 +1,31 @@
 <?php
-include "../db_conn.php";
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if(isset($_SESSION['email']) && isset($_SESSION['username'])){
-
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $author =$_SESSION['username'];
-
-}
-
-else {
-	
-    $title = "";
-    $content ="";
-    $author ="";
-
-    return include "access_failed.html";
-}
-
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//title, author, created_at
-$sql = "INSERT INTO posts (title,content, author) VALUES ('$title','$content','$author')";
-$result = $conn->query($sql);
-
-if ($result) {
-    // 게시글 추가에 성공한 경우
-    include "board.php";
-    
-} else {
-
-    // 게시글 추가에 실패한 경우
-    // 에러메세지 출력시 $error_message = mysqli_error($conn);
-
-    include "write_failed.html";
-    
-}
-}
-
-else {
-
-    // 게시글 추가에 실패한 경우
-    // 에러메세지 출력시 $error_message = mysqli_error($conn);
-
-    include "write_failed.html"; }
+session_start();
 ?>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글 작성</title>
+  <link rel="stylesheet" href="styles_write_post.css">
+  <link rel="stylesheet" href="/styles_back.css">
+  <link rel="stylesheet" href="/login/styles_login.css">
+</head>
+<body>
+  <div class="container">
+    <h2>게시글 작성</h2>
+    <div class="back-button">
+      <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
+    </div>
+    <div class="write-form">
+      <form action="process_post.php" method="post">
+        <label for="board_title">제목:</label><br>
+        <input type="text" id="board_title" name="board_title" required><br>
+        <label for="board_content">내용:</label><br>
+        <textarea id="board_content" name="board_content" rows="5" required></textarea><br>
+        <input type="submit" value="게시글 작성">
+      </form>
+    </div>
+  </div>
+</body>
+</html>

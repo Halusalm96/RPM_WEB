@@ -2,7 +2,6 @@
 include "../auth_check.php";
 ?>
 
-<!-- edit_page.php -->
 <?php
 include "../db_conn.php";
 

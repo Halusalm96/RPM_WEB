@@ -19,7 +19,7 @@ $sql = "INSERT INTO target (target_name, target_wait_time, target_open_time, tar
         VALUES ('$target_name', '$wait_time', '$open_time', '$close_time', '$min_height', '$max_height', '$target_x', '$target_y', '$target_status', '$target_utilization', '$target_precautions')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "새 놀이기구가 성공적으로 추가되었습니다.";
+    echo "놀이기구가 성공적으로 추가되었습니다.";
 } else {
     echo "오류: " . $sql . "<br>" . $conn->error;
 }

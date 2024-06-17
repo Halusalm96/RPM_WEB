@@ -15,14 +15,14 @@ body {
   position: relative;
   width: 90%;
   max-width: 400px;
-  max-height: 90%; /* 컨테이너의 최대 높이 설정 */
+  max-height: 90%;
   margin: 20px auto;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
-  overflow-y: auto; /* 내부 스크롤 활성화 */
+  overflow-y: auto;
 }
 
 .header {
@@ -35,8 +35,8 @@ body {
 }
 
 #target-table {
-  max-height: 300px; /* 최대 높이 설정 */
-  overflow-y: auto; /* 세로 스크롤 활성화 */
+  max-height: 300px;
+  overflow-y: auto;
   background-color: #f0f0f0;
   border-radius: 8px;
   padding: 10px;
@@ -45,7 +45,7 @@ body {
 
 table {
   border-collapse: collapse;
-  width: 100%; /* 표 전체 너비 설정 */
+  width: 100%;
 }
 
 th, td {
@@ -60,8 +60,8 @@ th {
 
 .add-button {
   position: absolute;
-  top: 10px; /* 상단 여백 조정 */
-  right: 10px; /* 우측 여백 조정 */
+  top: 10px;
+  right: 10px;
   z-index: 1;
 }
 
@@ -107,7 +107,7 @@ textarea[type="textarea"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  width: 100%; /* 입력 필드가 가득 차도록 너비 설정 */
+  width: 100%;
 }
 
 input[type="submit"] {

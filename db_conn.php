@@ -1,16 +1,15 @@
 <?php
 // DB 연결 정보
-//$servername = "13.124.83.151";
-//$username = "root";
-//$password = "1235";
-//$dbname = "rpm";
+$servername = "13.124.83.151";
+$username = "rpm";
+$password = "11223344";
+$dbname = "rpm";
 
 // 로컬 DB
 // $servername = "39.120.22.103";
-$servername = "192.168.55.118";
-$username = "rpm";
-$password = "19991215";
-$dbname = "rpm";
+// $username = "rpm";
+// $password = "19991215";
+// $dbname = "rpm";
 
 // DB 연결
 $conn = new mysqli($servername, $username, $password, $dbname);
