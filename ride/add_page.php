@@ -1,5 +1,5 @@
 <?php
-include "../auth_check.php";
+include "./auth_check_ride.php";
 ?>
 <!DOCTYPE html>
 <html lang="ko">

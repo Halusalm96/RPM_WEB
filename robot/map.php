@@ -26,6 +26,8 @@
             background-color: green;
             border-radius: 50%;
             transform: translate(-50%, -50%);
+            left: 569px; /* 예시로 설정한 좌표를 픽셀 단위로 지정 */
+            top: 586px; /* 예시로 설정한 좌표를 픽셀 단위로 지정 */
         }
 
         @media (max-width: 768px) {
@@ -38,7 +40,7 @@
 </head>
 <body>
     <div class="map-container">
-        <img src="testmap.jpg" alt="Map Image" class="map-image">
+        <img src="testmap2.jpg" alt="Map Image" class="map-image">
         <div class="robot-marker" id="robot-marker"></div>
     </div>
     <script>
@@ -47,8 +49,8 @@
                 .then(response => response.json())
                 .then(data => {
                     const robotMarker = document.getElementById('robot-marker');
-                    const mapWidth = 491;  // 맵 이미지의 너비
-                    const mapHeight = 390;  // 맵 이미지의 높이
+                    const mapWidth = 800;  // 맵 이미지의 너비
+                    const mapHeight = 635;  // 맵 이미지의 높이
                     const positionLeft = (data.x / mapWidth) * 100;
                     const positionTop = (data.y / mapHeight) * 100;
 

@@ -1,9 +1,14 @@
+<?php
+include "../auth_check.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/styles_home.css">
     <link rel="stylesheet" href="styles_monitoring.css">
+    <script src="../modal.js"></script>
     <title>메인 화면</title>
 </head>
 <body>

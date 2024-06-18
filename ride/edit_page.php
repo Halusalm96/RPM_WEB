@@ -39,6 +39,28 @@ if ($result->num_rows > 0) {
     <title>놀이기구 정보 수정</title>
     <link rel="stylesheet" href="styles_update.css">
     <link rel="stylesheet" href="/styles_back.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../modal.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 수정 폼 제출 이벤트
+            $('#edit-form').submit(function(event){
+                event.preventDefault();
+                $.ajax({
+                    url: 'target_update.php',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        alert('놀이기구 정보가 성공적으로 수정되었습니다.');
+                        window.location.replace('index.php'); // 다른 페이지로 이동
+                    },
+                    error: function() {
+                        alert('놀이기구 정보 수정에 실패했습니다.');
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -57,38 +79,58 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
 
-                <div class="input-row">
-                    <label for="edit_wait_time">대기 시간 (분):</label>
-                    <input type="number" id="edit_wait_time" name="target_wait_time" value="<?php echo $wait_time; ?>" required><br><br>
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_wait_time">대기 시간 (분):</label>
+                        <input type="number" id="edit_wait_time" name="target_wait_time" value="<?php echo $wait_time; ?>" required><br><br>
+                    </div>
                 </div>
 
-                <div class="input-row">
-                    <label for="edit_open_time">개장 시간:</label>
-                    <input type="text" id="edit_open_time" name="target_open_time" value="<?php echo $open_time; ?>" required><br><br>
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_open_time">개장 시간:</label>
+                        <input type="text" id="edit_open_time" name="target_open_time" value="<?php echo $open_time; ?>" required><br><br>
+                    </div>
                 </div>
 
-                <div class="input-row">
-                    <label for="edit_close_time">폐장 시간:</label>
-                    <input type="text" id="edit_close_time" name="target_close_time" value="<?php echo $close_time; ?>" required><br><br>
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_close_time">폐장 시간:</label>
+                        <input type="text" id="edit_close_time" name="target_close_time" value="<?php echo $close_time; ?>" required><br><br>
+                    </div>
                 </div>
 
-                <div class="input-row">
-                    <label for="edit_min_height">최소 키 제한 (cm):</label>
-                    <input type="number" id="edit_min_height" name="target_min_height" value="<?php echo $min_height; ?>" required><br><br>
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_min_height">최소 키 제한 (cm):</label>
+                        <input type="number" id="edit_min_height" name="target_min_height" value="<?php echo $min_height; ?>" required><br><br>
+                    </div>
                 </div>
 
-                <div class="input-row">
-                    <label for="edit_max_height">최대 키 제한 (cm):</label>
-                    <input type="number" id="edit_max_height" name="target_max_height" value="<?php echo $max_height; ?>" required><br><br>
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_max_height">최대 키 제한 (cm):</label>
+                        <input type="number" id="edit_max_height" name="target_max_height" value="<?php echo $max_height; ?>" required><br><br>
+                    </div>
                 </div>
 
-                <div class="input-row">
-                    <label for="edit_target_x">X 좌표:</label>
-                    <input type="number" step="0.0001" id="edit_target_x" name="target_x" value="<?php echo $target_x; ?>" required><br><br>
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_target_x">X 좌표:</label>
+                        <input type="number" step="0.0001" id="edit_target_x" name="target_x" value="<?php echo $target_x; ?>" required><br><br>
+                    </div>
                 </div>
 
-                <div class="input-row">
-                    <label for="edit_target_y">Y 좌표:</label>
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_target_y">Y 좌표:</label>
+                        <input type="number" step="0.0001" id="edit_target_y" name="target_y" value="<?php echo $target_y; ?>" required><br><br>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_target_y">Y 좌표:</label>
                     <input type="number" step="0.0001" id="edit_target_y" name="target_y" value="<?php echo $target_y; ?>" required><br><br>
                 </div>
 

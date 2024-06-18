@@ -1,6 +1,3 @@
-<?php
-include "/auth_check.php";
-?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>

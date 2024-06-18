@@ -1,6 +1,5 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-include "../auth_check.php";
 include "../db_conn.php";
 
 $sql = "SELECT robot_x, robot_y, robot_status FROM robot WHERE robot_key = 1";
