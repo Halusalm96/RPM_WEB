@@ -155,6 +155,7 @@ if ($result->num_rows > 0) {
                 <div class="input-row">
                     <input type="submit" value="정보 업데이트">
                 </div>
+                <a href="delete_target.php?id=<?php echo $target_key; ?>" onclick="return confirm('정말로 이 놀이기구을 삭제하시겠습니까?');">삭제</a>
             </form>
         </div>
     </div>
