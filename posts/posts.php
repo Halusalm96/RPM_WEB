@@ -66,7 +66,7 @@ $result = $conn->query($sql);
       text-decoration: none;
       border-radius: 4px;
     }
-    .edit-cell {
+    .edit-cell, .delete-cell {
       text-align: center;
     }
   </style>
@@ -97,9 +97,11 @@ $result = $conn->query($sql);
       <thead>
         <tr>
           <th>제목</th>
-          <th>내용</th>
           <th>작성자</th>
+          <th>작성 시간</th>
+          <th>수정 시간</th>
           <th>수정</th>
+          <th>삭제</th>
         </tr>
       </thead>
       <tbody>
@@ -107,14 +109,15 @@ $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>' . $row['board_title'] . '</td>';
-                echo '<td>' . $row['board_content'] . '</td>';
+                echo '<td><a href="view_post.php?id=' . $row['board_key'] . '">' . $row['board_title'] . '</a></td>';
                 echo '<td>' . $row['board_author'] . '</td>';
+                echo '<td>' . $row['created_date'] . '</td>';
+                echo '<td>' . $row['updated_date'] . '</td>';
                 echo '<td class="edit-cell">';
                 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     // 현재 로그인한 사용자와 게시글 작성자가 같은 경우에만 수정 가능
                     if ($_SESSION['manager_name'] == $row['board_author']) {
-                        echo "<a href='edit_post.php?id=" . $row["board_key"] . "'><img src='./icon/edit.png' alt='수정' width='35' height='35'></a>";
+                        echo "<a href='edit_post.php?id=" . $row["board_key"] . "'><img src='./icon/edit.png' alt='수정' width='30' height='30'></a>";
                     } else {
                         echo ''; // 다른 사용자의 게시글이면 수정 버튼 없음
                     }
@@ -122,10 +125,22 @@ $result = $conn->query($sql);
                     echo ''; // 로그인하지 않은 경우 수정 버튼 없음
                 }
                 echo '</td>';
+                echo '<td class="delete-cell">';
+                if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                    // 현재 로그인한 사용자와 게시글 작성자가 같은 경우에만 삭제 가능
+                    if ($_SESSION['manager_name'] == $row['board_author']) {
+                        echo "<a href='delete_post.php?id=" . $row["board_key"] . "' onclick='return confirm(\"정말로 이 게시글을 삭제하시겠습니까?\");'><img src='./icon/delete.png' alt='삭제' width='30' height='30'></a>";
+                    } else {
+                        echo ''; // 다른 사용자의 게시글이면 삭제 버튼 없음
+                    }
+                } else {
+                    echo ''; // 로그인하지 않은 경우 삭제 버튼 없음
+                }
+                echo '</td>';
                 echo '</tr>';
             }
         } else {
-            echo '<tr><td colspan="4">게시글이 없습니다.</td></tr>';
+            echo '<tr><td colspan="6">게시글이 없습니다.</td></tr>';
         }
         ?>
       </tbody>

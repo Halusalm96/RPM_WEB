@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
 }
 
 // 게시글 수정 처리
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_post'])) {
     $new_title = $_POST['board_title'];
     $new_content = $_POST['board_content'];
 
@@ -45,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "게시글 수정 중 오류가 발생했습니다.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <input type="text" id="board_title" name="board_title" value="<?php echo $board_title; ?>" required><br>
       <label for="board_content">내용:</label><br>
       <textarea id="board_content" name="board_content" rows="5" required><?php echo $board_content; ?></textarea><br>
-      <input type="submit" value="게시글 수정">
+      <input type="submit" name="update_post" value="게시글 수정">
+      <a href="delete_post.php?id=<?php echo $post_id; ?>" onclick="return confirm('정말로 이 게시글을 삭제하시겠습니까?');">게시글 삭제</a>
     </form>
   </div>
 </body>
