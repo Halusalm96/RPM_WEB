@@ -48,6 +48,11 @@ body {
     cursor: pointer;
     font-size: 18px;
     margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049; /* 호버 시 배경색 변경 */
   }
   
   

@@ -67,6 +67,10 @@ if (isset($_GET['id'])) {
     .edit-button {
       margin-top: 20px;
     }
+
+    .edit-button a:hover {
+      background-color: #45a049; /* 호버 시 배경색 변경 */
+    }
     .edit-button a {
       display: inline-block;
       padding: 5px 10px;
@@ -74,6 +78,7 @@ if (isset($_GET['id'])) {
       color: white;
       text-decoration: none;
       border-radius: 4px;
+      transition: background-color 0.3s;
     }
   </style>
 </head>

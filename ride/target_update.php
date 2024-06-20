@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../db_conn.php";
 
 // POST 데이터 가져오기
@@ -14,6 +15,12 @@ $target_y = $_POST['target_y'];
 $target_status = $_POST['target_status'];
 $target_utilization = $_POST['target_utilization'];
 $target_precautions = $_POST['target_precautions'];
+
+// 세션에 저장된 관리자 코드와 접근하려는 놀이기구의 키 확인
+if ($_SESSION['target_key'] != $target_key) {
+    echo "권한이 부족하여 수정할 수 없습니다.";
+    exit;
+}
 
 // 데이터 업데이트 쿼리
 $sql = "UPDATE target SET 

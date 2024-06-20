@@ -1,12 +1,23 @@
 <?php
-include "../auth_check.php";
-?>
+session_start();
 
-<?php
 include "../db_conn.php";
 
 // 수정할 놀이기구 ID를 가져옵니다.
 $target_key = $_GET['target_key'];
+
+// 세션에 저장된 사용자 역할(role) 확인
+$user_role = $_SESSION['role'];
+
+// 세션에 저장된 관리자 코드와 접근하려는 놀이기구의 키 확인
+if ($user_role !== '총관리자' && $_SESSION['target_key'] != $target_key) {
+    echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showModal('권한이 부족하여 접근할 수 없습니다.', '/login/main_page.php');
+            });
+          </script>";
+    exit;
+}
 
 // 해당 ID의 놀이기구 정보를 조회합니다.
 $sql = "SELECT * FROM target WHERE target_key = '$target_key'";
@@ -52,7 +63,7 @@ if ($result->num_rows > 0) {
                     data: $(this).serialize(),
                     success: function(response) {
                         alert('놀이기구 정보가 성공적으로 수정되었습니다.');
-                        window.location.replace('index.php'); // 다른 페이지로 이동
+                        window.location.replace('/login/main_page.php'); // 다른 페이지로 이동
                     },
                     error: function() {
                         alert('놀이기구 정보 수정에 실패했습니다.');
@@ -128,12 +139,6 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="input-row">
-                        <label for="edit_target_y">Y 좌표:</label>
-                    <input type="number" step="0.0001" id="edit_target_y" name="target_y" value="<?php echo $target_y; ?>" required><br><br>
-                </div>
-
                 <div class="input-row">
                     <label for="edit_target_status">상태:</label>
                     <select type="status" id="edit_target_status" name="target_status" required>
@@ -155,7 +160,6 @@ if ($result->num_rows > 0) {
                 <div class="input-row">
                     <input type="submit" value="정보 업데이트">
                 </div>
-                <a href="delete_target.php?id=<?php echo $target_key; ?>" onclick="return confirm('정말로 이 놀이기구을 삭제하시겠습니까?');">삭제</a>
             </form>
         </div>
     </div>

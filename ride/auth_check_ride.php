@@ -3,7 +3,6 @@ session_start();
 
 function checkUserRole() {
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-        //if ($_SESSION['role'] !== '직원' && $_SESSION['role'] !== '총관리자') {
 		if ($_SESSION['role'] !== '총관리자') {
             echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {

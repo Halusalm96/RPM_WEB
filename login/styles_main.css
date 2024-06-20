@@ -10,6 +10,7 @@ body {
   padding: 0;
   background-color: #f0f0f0;
 }
+
 .container {
   width: 90%;
   max-width: 600px;
@@ -26,11 +27,20 @@ body {
   flex-direction: column;
   justify-content: center;
 }
+
 h2 {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
 }
+
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 input[type="submit"] {
   width: 100%;
   padding: 10px;
@@ -41,11 +51,14 @@ input[type="submit"] {
   font-size: 18px;
   margin-top: 10px;
 }
+
 .button-container {
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: 20px;
 }
+
 button {
   width: 300px;
   height: 150px;
@@ -56,4 +69,9 @@ button {
   border-radius: 4px;
   cursor: pointer;
   white-space: pre-line;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049; /* 호버 시 배경색 변경 */
 }
