@@ -1,5 +1,6 @@
 <?php
 // DB 연결 정보
+// AWS EC2 MariaDB
 $servername = "13.124.83.151";
 $username = "rpm";
 $password = "11223344";

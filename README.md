@@ -7,6 +7,3 @@ $username = "DB 사용자명";
 $password = "DB 암호";
 
 $dbname = "데이터베이스명";
-
-![image](https://github.com/Halusalm96/RPM_WEB/assets/168413101/81b7eddc-f440-4c66-b0f9-4a9545a1e86c)
-![image](https://github.com/Halusalm96/RPM_WEB/assets/168413101/690323db-f525-4702-974f-ba4245da90be)
