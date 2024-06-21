@@ -2,7 +2,7 @@
 header('Content-Type: text/html; charset=utf-8');
 include "../db_conn.php";
 
-$sql = "SELECT robot_x, robot_y, robot_status FROM robot WHERE robot_key = 1";
+$sql = "SELECT robot_x, robot_y, robot_status FROM robot WHERE robot_no = 1";
 $result = $conn->query($sql);
 
 $response = array();

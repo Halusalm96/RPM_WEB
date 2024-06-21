@@ -11,7 +11,7 @@
     include "../db_conn.php";
 
     // 데이터베이스에서 로봇 위치 정보를 가져오는 쿼리
-    $sql = "SELECT class_name, confidence FROM detections WHERE detections_key = 1";
+    $sql = "SELECT class_name, confidence FROM detections WHERE detections_no = 1";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

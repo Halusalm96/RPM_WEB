@@ -4,13 +4,13 @@ session_start();
 include "../db_conn.php";
 
 // 수정할 놀이기구 ID를 가져옵니다.
-$target_key = $_GET['target_key'];
+$target_no = $_GET['target_no'];
 
 // 세션에 저장된 사용자 역할(role) 확인
 $user_role = $_SESSION['role'];
 
 // 세션에 저장된 관리자 코드와 접근하려는 놀이기구의 키 확인
-if ($user_role !== '총관리자' && $_SESSION['target_key'] != $target_key) {
+if ($user_role !== '총관리자' && $_SESSION['target_no'] != $target_no) {
     echo "<script>
             document.addEventListener('DOMContentLoaded', function() {
                 showModal('권한이 부족하여 접근할 수 없습니다.', '/login/main_page.php');
@@ -20,7 +20,7 @@ if ($user_role !== '총관리자' && $_SESSION['target_key'] != $target_key) {
 }
 
 // 해당 ID의 놀이기구 정보를 조회합니다.
-$sql = "SELECT * FROM target WHERE target_key = '$target_key'";
+$sql = "SELECT * FROM target WHERE target_no = '$target_no'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -81,7 +81,7 @@ if ($result->num_rows > 0) {
                 <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
             </div>
             <form id="edit-form" class="edit-form" method="post">
-                <input type="hidden" id="edit_target_key" name="target_key" value="<?php echo $target_key; ?>">
+                <input type="hidden" id="edit_target_no" name="target_no" value="<?php echo $target_no; ?>">
                 
                 <div class="form-group">
                     <div class="input-row">

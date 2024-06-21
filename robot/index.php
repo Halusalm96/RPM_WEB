@@ -16,7 +16,7 @@ include "../db_conn.php";
             position: relative;
             width: 600px; /* 맵 이미지 너비에 맞게 조정 */
             height: 476px; /* 맵 이미지 높이에 맞게 조정 */
-            background-image: url('testmap.jpg'); /* 맵 이미지 경로 설정 */
+            background-image: url('rpm_map.jpg'); /* 맵 이미지 경로 설정 */
             background-size: contain;
             background-repeat: no-repeat;
         }

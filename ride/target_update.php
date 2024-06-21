@@ -3,7 +3,7 @@ session_start();
 include "../db_conn.php";
 
 // POST 데이터 가져오기
-$target_key = $_POST['target_key'];
+$target_no = $_POST['target_no'];
 $target_name = $_POST['target_name'];
 $wait_time = $_POST['target_wait_time'];
 $open_time = $_POST['target_open_time'];
@@ -17,7 +17,7 @@ $target_utilization = $_POST['target_utilization'];
 $target_precautions = $_POST['target_precautions'];
 
 // 세션에 저장된 관리자 코드와 접근하려는 놀이기구의 키 확인
-if ($_SESSION['target_key'] != $target_key) {
+if ($_SESSION['target_no'] != $target_no) {
     echo "권한이 부족하여 수정할 수 없습니다.";
     exit;
 }
@@ -35,7 +35,7 @@ $sql = "UPDATE target SET
         target_status='$target_status',
         target_utilization='$target_utilization',
         target_precautions='$target_precautions'
-        WHERE target_key='$target_key'";
+        WHERE target_no='$target_no'";
 
 if ($conn->query($sql) === TRUE) {
     echo "놀이기구 정보가 성공적으로 업데이트되었습니다.";

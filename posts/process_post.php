@@ -6,13 +6,13 @@ include "../db_conn.php"; // 데이터베이스 연결 파일 경로에 따라 �
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $board_title = $_POST['board_title'];
     $board_content = $_POST['board_content'];
-    $manager_key = $_SESSION['manager_key']; // 현재 로그인한 관리자의 manager_key 사용
+    $manager_no = $_SESSION['manager_no']; // 현재 로그인한 관리자의 manager_no 사용
 
     // SQL 쿼리 작성
-    $sql = "INSERT INTO board (manager_key, board_title, board_content, board_author) 
+    $sql = "INSERT INTO board (manager_no, board_title, board_content, board_author) 
             VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("isss", $manager_key, $board_title, $board_content, $_SESSION['manager_name']);
+    $stmt->bind_param("isss", $manager_no, $board_title, $board_content, $_SESSION['manager_name']);
 
     // 쿼리 실행
     if ($stmt->execute()) {

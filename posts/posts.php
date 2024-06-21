@@ -109,7 +109,7 @@ $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td><a href="view_post.php?id=' . $row['board_key'] . '">' . $row['board_title'] . '</a></td>';
+                echo '<td><a href="view_post.php?id=' . $row['board_no'] . '">' . $row['board_title'] . '</a></td>';
                 echo '<td>' . $row['board_author'] . '</td>';
                 echo '<td>' . $row['created_date'] . '</td>';
                 echo '<td>' . $row['updated_date'] . '</td>';
@@ -117,7 +117,7 @@ $result = $conn->query($sql);
                 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     // 현재 로그인한 사용자와 게시글 작성자가 같은 경우에만 수정 가능
                     if ($_SESSION['manager_name'] == $row['board_author']) {
-                        echo "<a href='edit_post.php?id=" . $row["board_key"] . "'><img src='./icon/edit.png' alt='수정' width='30' height='30'></a>";
+                        echo "<a href='edit_post.php?id=" . $row["board_no"] . "'><img src='./icon/edit.png' alt='수정' width='30' height='30'></a>";
                     } else {
                         echo ''; // 다른 사용자의 게시글이면 수정 버튼 없음
                     }
@@ -129,7 +129,7 @@ $result = $conn->query($sql);
                 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     // 현재 로그인한 사용자와 게시글 작성자가 같은 경우에만 삭제 가능
                     if ($_SESSION['manager_name'] == $row['board_author']) {
-                        echo "<a href='delete_post.php?id=" . $row["board_key"] . "' onclick='return confirm(\"정말로 이 게시글을 삭제하시겠습니까?\");'><img src='./icon/delete.png' alt='삭제' width='30' height='30'></a>";
+                        echo "<a href='delete_post.php?id=" . $row["board_no"] . "' onclick='return confirm(\"정말로 이 게시글을 삭제하시겠습니까?\");'><img src='./icon/delete.png' alt='삭제' width='30' height='30'></a>";
                     } else {
                         echo ''; // 다른 사용자의 게시글이면 삭제 버튼 없음
                     }

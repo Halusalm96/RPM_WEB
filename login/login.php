@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $admin_code = $_POST['admin_code'];
 
     // Prepared Statement 사용
-    $sql = "SELECT manager_key, manager_id, manager_name, manager_pw, role FROM manager WHERE manager_id=?";
+    $sql = "SELECT manager_no, manager_id, manager_name, manager_pw, role FROM manager WHERE manager_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $manager_id);
     $stmt->execute();
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($targetResult && $targetResult->num_rows > 0) {
                     $target = $targetResult->fetch_assoc();
                     $newRole = '놀이기구관리자';
-                    $target_key = $target['target_key'];
+                    $target_no = $target['target_no'];
                 } else {
                     echo "<script>alert('잘못된 관리자 코드입니다.'); window.location.href = '/index.html';</script>";
                     exit;
@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['manager_id'] = $row['manager_id'];
             $_SESSION['manager_name'] = $row['manager_name'];
             $_SESSION['role'] = $newRole;
-            if (isset($target_key)) {
-                $_SESSION['target_key'] = $target_key;
+            if (isset($target_no)) {
+                $_SESSION['target_no'] = $target_no;
             }
 
             // 로그인 후 메인 페이지로 리다이렉션

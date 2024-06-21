@@ -4,10 +4,10 @@ include "../db_conn.php"; // 데이터베이스 연결 파일 경로에 따라 �
 
 // 게시글 상세 조회 쿼리
 if (isset($_GET['id'])) {
-    $board_key = $_GET['id'];
-    $sql = "SELECT * FROM board WHERE board_key = ?";
+    $board_no = $_GET['id'];
+    $sql = "SELECT * FROM board WHERE board_no = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $board_key);
+    $stmt->bind_param("i", $board_no);
     $stmt->execute();
     $result = $stmt->get_result();
     $post = $result->fetch_assoc();
@@ -99,7 +99,7 @@ if (isset($_GET['id'])) {
     <?php
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['manager_name'] == $post['board_author']) {
         echo '<div class="edit-button">';
-        echo "<a href='edit_post.php?id=" . $post["board_key"] . "'>수정</a>";
+        echo "<a href='edit_post.php?id=" . $post["board_no"] . "'>수정</a>";
         echo '</div>';
     }
     ?>

@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     $post_id = $_GET['id'];
 
     // 해당 게시글 정보 조회 쿼리
-    $sql = "SELECT * FROM board WHERE board_key = ?";
+    $sql = "SELECT * FROM board WHERE board_no = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $post_id);
     $stmt->execute();
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_post'])) {
     $new_content = $_POST['board_content'];
 
     // 게시글 업데이트 쿼리
-    $update_sql = "UPDATE board SET board_title = ?, board_content = ? WHERE board_key = ?";
+    $update_sql = "UPDATE board SET board_title = ?, board_content = ? WHERE board_no = ?";
     $stmt = $conn->prepare($update_sql);
     $stmt->bind_param("ssi", $new_title, $new_content, $post_id);
 

@@ -18,7 +18,7 @@
                     <tr>
                         <th>놀이기구 이름</th>
                         <th>관리자 코드</th>
-                        <th>새로운 코드 생성</th>
+                        <th>랜덤 코드 재생성</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@
                         echo "<tr>";
                         echo "<td>" . $target['target_name'] . "</td>";
                         echo "<td>" . $target['manager_code'] . "</td>";
-                        echo "<td><button class='generate-code-button' onclick=\"generateNewCode(" . $target['target_key'] . ")\">새로운 코드 생성</button></td>";
+                        echo "<td><button class='generate-code-button' onclick=\"generateNewCode(" . $target['target_no'] . ")\">재생성</button></td>";
                         echo "</tr>";
                     }
                     ?>
@@ -40,9 +40,9 @@
     </div>
     
     <script>
-        function generateNewCode(targetKey) {
+        function generateNewCode(targetNo) {
             if (confirm("정말로 새로운 코드를 생성하시겠습니까?")) {
-                fetch('generate_code.php?target_key=' + targetKey)
+                fetch('generate_code.php?target_no=' + targetNo)
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {

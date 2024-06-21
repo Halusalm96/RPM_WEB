@@ -2,7 +2,7 @@
 include "../db_conn.php";
 
 // 데이터베이스에서 로봇 위치 정보를 가져오는 쿼리
-$sql = "SELECT robot_x, robot_y, status FROM robot WHERE robot_key = 1";
+$sql = "SELECT robot_x, robot_y, status FROM robot WHERE robot_no = 1";
 $result = $conn->query($sql);
 
 $response = array();

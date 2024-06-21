@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     $post_id = $_GET['id'];
 
     // 게시글 삭제 쿼리
-    $delete_sql = "DELETE FROM board WHERE board_key = ?";
+    $delete_sql = "DELETE FROM board WHERE board_no = ?";
     $stmt = $conn->prepare($delete_sql);
     $stmt->bind_param("i", $post_id);
 

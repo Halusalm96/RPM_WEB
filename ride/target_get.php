@@ -19,8 +19,8 @@ $result = $conn->query($sql);
             echo "<tr>";
             echo "<td class='target-name'>" . $row["target_name"] . "</td>";
             echo "<td class='target-status'>" . $row["target_status"] . "</td>";
-            echo "<td><a href='edit_page.php?target_key=" . $row["target_key"] . "' class='edit-button'><img src='./icon/edit.png' alt='수정'></a></td>";
-            echo "<td><a href='delete_target.php?id=" . $row["target_key"] . "' onclick='return confirm(\"정말로 이 놀이기구를 삭제하시겠습니까?\");'><img src='./icon/delete.png' alt='삭제' width='30' height='30'></a></td>";
+            echo "<td><a href='edit_page.php?target_no=" . $row["target_no"] . "' class='edit-button'><img src='./icon/edit.png' alt='수정'></a></td>";
+            echo "<td><a href='delete_target.php?id=" . $row["target_no"] . "' onclick='return confirm(\"정말로 이 놀이기구를 삭제하시겠습니까?\");'><img src='./icon/delete.png' alt='삭제' width='30' height='30'></a></td>";
             echo "</tr>";
         }
     } else {

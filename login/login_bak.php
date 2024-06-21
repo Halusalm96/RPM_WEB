@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $admin_code = $_POST['admin_code'];
 
     // Prepared Statement 사용
-    $sql = "SELECT manager_key, manager_id, manager_name, manager_pw, role FROM manager WHERE manager_id=?";
+    $sql = "SELECT manager_no, manager_id, manager_name, manager_pw, role FROM manager WHERE manager_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $manager_id);
     $stmt->execute();
