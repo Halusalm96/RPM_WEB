@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로봇 내비게이션</title>
+    <link rel="stylesheet" href="styles.css"> <!-- 필요한 경우 스타일시트 링크 추가 -->
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>로봇 내비게이션</h1>
+        </div>
+
+        <div class="navigation">
+            <label for="destination-x">목적지 X 좌표:</label>
+            <input type="number" id="destination-x" step="0.01" placeholder="X 좌표 입력">
+            <label for="destination-y">목적지 Y 좌표:</label>
+            <input type="number" id="destination-y" step="0.01" placeholder="Y 좌표 입력">
+            <label for="destination-y">방향 Z 값:</label>
+            <input type="number" id="destination-z" step="0.01" placeholder="Z 값 입력">
+            <label for="destination-y">방향 W 값:</label>
+            <input type="number" id="destination-w" step="0.01" placeholder="W 값 입력">
+            <button onclick="startNavigation()">내비게이션 시작</button>
+        </div>
+
+        <div class="status">
+            <p>상태: <span id="status-text"></span><div id="status-indicator" class="status-indicator"></div></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/roslib@1.1.0/build/roslib.min.js"></script>
+    <script>
+        var ros = new ROSLIB.Ros({
+            url: 'ws://192.168.123.118:9090'
+        });
+
+        ros.on('connection', function() {
+            console.log('Connected to ROS');
+            updateConnectionStatus(true);
+        });
+
+        ros.on('error', function(error) {
+            console.log('Error connecting to ROS:', error);
+            updateConnectionStatus(false);
+        });
+
+        ros.on('close', function() {
+            console.log('Disconnected from ROS');
+            updateConnectionStatus(false);
+        });
+
+        function updateConnectionStatus(connected) {
+            var statusText = document.getElementById('status-text');
+            var statusIndicator = document.getElementById('status-indicator');
+
+            if (connected) {
+                statusText.textContent = 'Online';
+                statusIndicator.style.backgroundColor = 'green';
+            } else {
+                statusText.textContent = 'Offline';
+                statusIndicator.style.backgroundColor = 'gray';
+            }
+        }
+
+        function startNavigation() {
+            var destinationX = parseFloat(document.getElementById('destination-x').value);
+            var destinationY = parseFloat(document.getElementById('destination-y').value);
+            var destinationZ = parseFloat(document.getElementById('destination-z').value);
+            var destinationW = parseFloat(document.getElementById('destination-w').value);
+
+            if (isNaN(destinationX) || isNaN(destinationY) || isNaN(destinationZ) || isNaN(destinationW)) {
+                alert('올바른 좌표를 입력해주세요.');
+                return;
+            }
+
+            var goalMessage = new ROSLIB.Message({
+                header: {
+                    frame_id: 'map', // 목적지는 맵 기준 좌표로 설정
+                    stamp: { secs: 0, nsecs: 0 }
+                },
+                pose: {
+                    position: {
+                        x: destinationX,
+                        y: destinationY,
+                        z: 0.0
+                    },
+                    orientation: {
+                        x: 0.0,
+                        y: 0.0,
+                        z: destinationZ,
+                        w: destinationW
+                    }
+                }
+            });
+
+            var goalPublisher = new ROSLIB.Topic({
+                ros: ros,
+                name: '/move_base_simple/goal',
+                messageType: 'geometry_msgs/PoseStamped'
+            });
+
+            goalPublisher.publish(goalMessage);
+            console.log('Sent navigation goal:', destinationX, destinationY, destinationZ, destinationW);
+        }
+    </script>
+</body>
+</html>

@@ -34,14 +34,17 @@
 
         ros.on('connection', function() {
             console.log('Connected to ROS');
+            updateConnectionStatus(true);
         });
 
         ros.on('error', function(error) {
             console.log('Error connecting to ROS:', error);
+            updateConnectionStatus(false);
         });
 
         ros.on('close', function() {
             console.log('Disconnected from ROS');
+            updateConnectionStatus(false);
         });
 
         setInterval(function() {
@@ -51,6 +54,19 @@
                 console.log('ROS connection is not alive');
             }
         }, 5000);
+
+        function updateConnectionStatus(connected) {
+            var statusText = document.getElementById('status-text');
+            var statusIndicator = document.getElementById('status-indicator');
+
+            if (connected) {
+                statusText.textContent = 'Online';
+                statusIndicator.style.backgroundColor = 'green';
+            } else {
+                statusText.textContent = 'Offline';
+                statusIndicator.style.backgroundColor = 'gray';
+            }
+        }
 
         var robotListener = new ROSLIB.Topic({
             ros: ros,
@@ -104,7 +120,7 @@
                 }
             }
             if (!foundTransform) {
-                console.log('No transform with frame_id "odom" and child_frame_id "base_link" found in the message');
+                console.log('No transform with frame_id "odom" and child_frame_id "base_footprint" found in the message');
             }
         });
     </script>
