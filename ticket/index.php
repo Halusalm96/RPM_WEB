@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <title>이용권 관리</title>
     <link rel="stylesheet" href="styles_ticket.css">
-    <link rel="stylesheet" href="/styles_back.css">
+    <link rel="stylesheet" href="/styles_home.css">
 </head>
 <body>
     <div class="container">
         <h1>이용권 관리</h1>
-        <div class="back-button">
-            <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
+        <div class="home-button">
+            <a href="/login/main_page.php">
+                <img src="./icon/home.png" alt="메인화면">
+            </a>
         </div>
         <form method="POST" action="generate_ticket.php">
             <div class="input-row">
@@ -21,10 +23,10 @@
         <table>
             <thead>
                 <tr>
-                    <th>티켓 번호</th>
-                    <th>티켓 코드</th>
-                    <th>QR 코드</th>
-                    <th>작업</th>
+                    <th>ticket_no</th>
+                    <th>ticket_code</th>
+                    <th>ticket_qr</th>
+                    <th>delete</th>
                 </tr>
             </thead>
             <tbody>

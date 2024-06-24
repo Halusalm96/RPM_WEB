@@ -7,7 +7,10 @@ function generate_unique_code($length = 8) {
     return substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, $length);
 }
 
+$fixed_url = 'https://yourwebsite.com/';
 $ticket_code = generate_unique_code();
+$full_code = $fixed_url . $ticket_code;
+
 $qrDir = 'qr_codes/';
 if (!file_exists($qrDir)) {
     mkdir($qrDir);
@@ -18,7 +21,7 @@ if (!is_writable($qrDir)) {
 }
 
 $qrFilePath = $qrDir . $ticket_code . '.png';
-QRcode::png($ticket_code, $qrFilePath);
+QRcode::png($full_code, $qrFilePath);
 
 // 티켓 정보를 데이터베이스에 저장
 $stmt = $conn->prepare("INSERT INTO ticket (ticket_code, ticket_qr) VALUES (?, ?)");

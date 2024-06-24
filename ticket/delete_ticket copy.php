@@ -17,18 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_ticket'])) {
             if (file_exists($ticket_qr)) {
                 unlink($ticket_qr); // 파일 삭제
             }
-            
-            // 삭제 후에 AUTO_INCREMENT 값을 설정하는 쿼리 실행
-            $sql_auto = "ALTER TABLE ticket AUTO_INCREMENT = 1";
-            if ($conn->query($sql_auto) === TRUE) {
-                echo "<script>alert('티켓이 성공적으로 삭제되었습니다.');
-                      window.location.replace('index.php');
-                      </script>";
-                exit; // 리디렉션 후 스크립트 실행 중지
-            } else {
-                echo "Error: " . $sql_auto . "<br>" . $conn->error;
-            }
-            
+            echo "<script>alert('티켓이 성공적으로 삭제되었습니다.');
+                  window.location.replace('index.php');
+                  </script>";
+            exit; // 리디렉션 후 스크립트 실행 중지
         } else {
             echo "Error: " . $sql_delete . "<br>" . $conn->error;
         }
