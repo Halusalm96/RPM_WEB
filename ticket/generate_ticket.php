@@ -7,7 +7,7 @@ function generate_unique_code($length = 8) {
     return substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, $length);
 }
 
-$fixed_url = 'https://yourwebsite.com/';
+$fixed_url = 'http://192.168.123.17:8080/validate_code?code=';
 $ticket_code = generate_unique_code();
 $full_code = $fixed_url . $ticket_code;
 
