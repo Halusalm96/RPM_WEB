@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로봇 내비게이션</title>
-    <link rel="stylesheet" href="styles.css"> <!-- 필요한 경우 스타일시트 링크 추가 -->
+    <link rel="stylesheet" href="styles_navi.css"> <!-- 필요한 경우 스타일시트 링크 추가 -->
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <!-- <div class="header">
             <h1>로봇 내비게이션</h1>
-        </div>
+        </div> -->
 
         <div class="navigation">
             <label for="destination-x">목적지 X 좌표:</label>
@@ -24,9 +24,9 @@
             <button onclick="startNavigation()">내비게이션 시작</button>
         </div>
 
-        <div class="status">
-            <p>상태: <span id="status-text"></span><div id="status-indicator" class="status-indicator"></div></p>
-        </div>
+        <!-- <div class="overlay">
+            <img src="merry_go_round.png" alt="목적지 마커" id="marker" style="position: absolute; top: 50px; left: 100px;">
+        </div> -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/roslib@1.1.0/build/roslib.min.js"></script>

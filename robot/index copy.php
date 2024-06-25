@@ -18,27 +18,25 @@
         <div class="back-button">
             <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
         </div>
-        <iframe src="/goal/button.html" style="width: 100%; height: 70px; border: none; margin-bottom: 20px;"></iframe>
-        <div class="status_panel">
+
+        <div class="status">
             <p>상태: <span id="status-text">Offline</span><div id="status-indicator" class="status-indicator" style="background-color: gray;"></div></p>
         </div>
-        <div class="main-content">
-            <div class="left-panel">
-                <!-- 맵 컨테이너 -->
-                <div class="map-container">
-                    <canvas id="mapCanvas" width="491" height="390"></canvas>
-                    <!-- 맵 위에 배치할 정보 -->
-                    <div id="additionalInfo" class="additional-info"></div>
-                </div>
-            </div>
+        
+        <!-- 맵 컨테이너 -->
+        <div class="map-container" style="position: relative;">
+            <canvas id="mapCanvas" width="491" height="390"></canvas>
 
-            <div class="right-panel">
-                <!-- 카메라 이미지 표시 -->
-                <iframe src="./camera.html" style="width: 400px; height: 300px; border: none;"></iframe>
-                <!-- <iframe src="./camera_cv.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
-                <!-- <iframe src="./camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
-            </div>
+            <!-- 맵 위에 배치할 정보 -->
+            <div id="additionalInfo" class="additional-info"></div>
         </div>
+    </div>
+    <div class="container">
+    <iframe src="/goal/button.html" style="width: 100%; height: 300px; border: none; margin-top: 20px;"></iframe>
+    <!-- 카메라 이미지 표시 -->
+    <iframe src="./camera.html" style="width: 100%; height: 300px; border: none; margin-top: 20px;"></iframe>
+    <!-- <iframe src="./camera_cv.html" style="width: 100%; height: 300px; border: none; margin-top: 20px;"></iframe> -->
+    <!-- <iframe src="./camera_pi.html" style="width: 100%; height: 300px; border: none; margin-top: 20px;"></iframe>   -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/roslib@1.1.0/build/roslib.min.js"></script>
@@ -115,15 +113,6 @@
             }
         });
 
-        pathListener.subscribe(function(message) { // plan
-            if (!goalReached) {
-                pathCoordinates = message.poses.map(function(pose) {
-                    return { x: pose.pose.position.x, y: pose.pose.position.y };
-                });
-                updateCanvas();
-            }
-        });
-
         pathListener.subscribe(function(message) {
             if (!goalReached) {
                 pathCoordinates = message.poses.map(function(pose) {
@@ -157,6 +146,15 @@
             mapImage.onload = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(mapImage, 0, 0, canvas.width, canvas.height);
+
+                var otherImage = new Image();
+            otherImage.src = 'roller_coster.png'; // 예시: 로봇 이미지
+            otherImage.onload = function() {
+                // 원하는 위치에 다른 이미지 그리기
+                var x = -1.7; // X 좌표
+                var y = 13; // Y 좌표
+                ctx.drawImage(otherImage, x, y, 50, 50); // 다른 이미지 크기 조정 가능
+            };
 
                 var resolution = 0.05;
                 var offsetX = 385;
