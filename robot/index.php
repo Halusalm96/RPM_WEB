@@ -18,7 +18,9 @@
         <div class="back-button">
             <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
         </div>
-        <iframe src="/goal/button.html" style="width: 100%; height: 70px; border: none; margin-bottom: 20px;"></iframe>
+        
+        <iframe src="/goal" style="width: 100%; height: 70px; border: none; margin-bottom: 20px;"></iframe>
+
         <div class="status_panel">
             <p>상태: <span id="status-text">Offline</span><div id="status-indicator" class="status-indicator" style="background-color: gray;"></div></p>
         </div>

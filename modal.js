@@ -1,4 +1,10 @@
 function showModal(message, redirectUrl) {
+    // 기존에 모달이 열려 있다면 닫기
+    var existingModal = document.getElementById('myModal');
+    if (existingModal) {
+        document.body.removeChild(existingModal);
+    }
+
     // 모달 요소 생성
     var modal = document.createElement('div');
     modal.className = 'modal';
@@ -63,13 +69,17 @@ function showModal(message, redirectUrl) {
     // 모달 닫기 이벤트
     closeButton.onclick = function() {
         modal.style.display = 'none';
-        window.location.href = redirectUrl;
+        if (redirectUrl) {
+            window.location.href = redirectUrl;
+        }
     }
 
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = 'none';
-            window.location.href = redirectUrl;
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
         }
     }
 }

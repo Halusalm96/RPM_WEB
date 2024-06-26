@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($manager_pw, $hashed_password)) {
             // 관리자 코드 검증
             if ($admin_code === '11223344') {
-                $newRole = '총관리자';
+                $role = '총관리자';
             } elseif (!empty($admin_code)) {
                 // 놀이기구 관리자 코드 검증
                 $sql = "SELECT * FROM target WHERE manager_code = ?";
@@ -32,24 +32,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $targetResult = $stmt->get_result();
                 if ($targetResult && $targetResult->num_rows > 0) {
                     $target = $targetResult->fetch_assoc();
-                    $newRole = '놀이기구관리자';
+                    $role = '놀이기구관리자';
                     $target_no = $target['target_no'];
                 } else {
                     echo "<script>alert('잘못된 관리자 코드입니다.'); window.location.href = '/index.html';</script>";
                     exit;
                 }
             } else {
-                $newRole = '직원';
+                $role = '직원';
             }
 
             // 세션에 사용자 정보 저장
             $_SESSION['loggedin'] = true;
             $_SESSION['manager_id'] = $row['manager_id'];
             $_SESSION['manager_name'] = $row['manager_name'];
-            $_SESSION['role'] = $newRole;
+            $_SESSION['role'] = $role;
             if (isset($target_no)) {
                 $_SESSION['target_no'] = $target_no;
             }
+
+            // 데이터베이스 역할(role) 업데이트
+            $update_sql = "UPDATE manager SET role = ? WHERE manager_id = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("ss", $role, $manager_id);
+            $update_stmt->execute();
 
             // 로그인 후 메인 페이지로 리다이렉션
             header('Location: main_page.php');

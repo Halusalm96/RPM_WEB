@@ -122,6 +122,20 @@ include "../auth_check.php";
 
                 <div class="form-group">
                     <div class="input-row">
+                        <label for="add_target_z">Z 값:</label>
+                        <input type="number" step="0.0001" id="add_target_z" name="target_z" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="add_target_w">W 값:</label>
+                        <input type="number" step="0.0001" id="add_target_w" name="target_w" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-row">
                         <label for="add_target_status">상태:</label>
                         <select type="status" id="add_target_status" name="target_status" required>
                             <option value="Open">Open</option>

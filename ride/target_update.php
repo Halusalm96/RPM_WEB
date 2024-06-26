@@ -12,12 +12,14 @@ $min_height = $_POST['target_min_height'];
 $max_height = $_POST['target_max_height'];
 $target_x = $_POST['target_x'];
 $target_y = $_POST['target_y'];
+$target_z = $_POST['target_z'];
+$target_w = $_POST['target_w'];
 $target_status = $_POST['target_status'];
 $target_utilization = $_POST['target_utilization'];
 $target_precautions = $_POST['target_precautions'];
 
-// 세션에 저장된 관리자 코드와 접근하려는 놀이기구의 키 확인
-if ($_SESSION['target_no'] != $target_no) {
+// 권한 확인
+if ($_SESSION['role'] !== '총관리자' && $_SESSION['target_no'] != $target_no) {
     echo "권한이 부족하여 수정할 수 없습니다.";
     exit;
 }
@@ -32,9 +34,11 @@ $sql = "UPDATE target SET
         target_max_height='$max_height', 
         target_x='$target_x', 
         target_y='$target_y', 
-        target_status='$target_status',
-        target_utilization='$target_utilization',
-        target_precautions='$target_precautions'
+        target_z='$target_z', 
+        target_w='$target_w', 
+        target_status='$target_status', 
+        target_utilization='$target_utilization', 
+        target_precautions='$target_precautions' 
         WHERE target_no='$target_no'";
 
 if ($conn->query($sql) === TRUE) {

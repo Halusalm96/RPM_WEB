@@ -7,10 +7,10 @@ include "../db_conn.php";
 $target_no = $_GET['target_no'];
 
 // 세션에 저장된 사용자 역할(role) 확인
-$user_role = $_SESSION['role'];
+$role = $_SESSION['role'];
 
 // 세션에 저장된 관리자 코드와 접근하려는 놀이기구의 키 확인
-if ($user_role !== '총관리자' && $_SESSION['target_no'] != $target_no) {
+if ($role !== '총관리자' && $_SESSION['target_no'] != $target_no) {
     echo "<script>
             document.addEventListener('DOMContentLoaded', function() {
                 showModal('권한이 부족하여 접근할 수 없습니다.', '/login/main_page.php');
@@ -34,6 +34,8 @@ if ($result->num_rows > 0) {
     $max_height = $row["target_max_height"];
     $target_x = $row["target_x"];
     $target_y = $row["target_y"];
+    $target_z = $row["target_z"];
+    $target_w = $row["target_w"];
     $target_status = $row["target_status"];
     $target_utilization = $row["target_utilization"];
     $target_precautions = $row["target_precautions"];
@@ -63,7 +65,14 @@ if ($result->num_rows > 0) {
                     data: $(this).serialize(),
                     success: function(response) {
                         alert('놀이기구 정보가 성공적으로 수정되었습니다.');
-                        window.location.replace('/login/main_page.php'); // 다른 페이지로 이동
+                        // 세션에 저장된 역할(role) 가져오기
+                        var role = '<?php echo $_SESSION['role']; ?>';
+                        // 권한에 따라 리다이렉션 처리
+                        if (role === '총관리자') {
+                            window.location.replace('index.php');
+                        } else {
+                            window.location.replace('/login/main_page.php');
+                        }
                     },
                     error: function() {
                         alert('놀이기구 정보 수정에 실패했습니다.');
@@ -136,6 +145,20 @@ if ($result->num_rows > 0) {
                     <div class="input-row">
                         <label for="edit_target_y">Y 좌표:</label>
                         <input type="number" step="0.0001" id="edit_target_y" name="target_y" value="<?php echo $target_y; ?>" required><br><br>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_target_z">Z 값:</label>
+                        <input type="number" step="0.0001" id="edit_target_z" name="target_z" value="<?php echo $target_z; ?>" required><br><br>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-row">
+                        <label for="edit_target_w">W 값:</label>
+                        <input type="number" step="0.0001" id="edit_target_w" name="target_w" value="<?php echo $target_w; ?>" required><br><br>
                     </div>
                 </div>
 

@@ -27,16 +27,16 @@ session_start();
     </div>
     <h2>RPM Main</h2>
     <div class="button-container">
-      <button onclick="location.href='/robot'">로봇 관제</button>
       <?php if (isset($_SESSION['role']) && $_SESSION['role'] == '직원'): ?>
-        <!-- <button onclick="location.href='/login/admin_code_input.php'">놀이기구 관리</button> -->
         <button onclick="location.href='/posts/posts.php'">게시판</button>
       <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == '총관리자'): ?>
+        <button onclick="location.href='/robot'">로봇 관제</button>
         <button onclick="location.href='/ride/index.php'">놀이기구 관리</button>
         <button onclick="location.href='/posts/posts.php'">게시판</button>
         <button onclick="location.href='/ticket'">이용권 관리</button>
         <a href="/ride/admin_page.php" class="admin-button admin-button-link">놀이기구 관리자 코드 관리</a>
       <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == '놀이기구관리자'): ?>
+        <button onclick="location.href='/robot'">로봇 관제</button>
         <button onclick="location.href='/ride/edit_page.php?target_no=<?php echo $_SESSION['target_no']; ?>'">내 놀이기구 관리</button>
         <button onclick="location.href='/posts/posts.php'">게시판</button>
       <?php endif; ?>
