@@ -66,7 +66,7 @@
         }
 
         function navigateToPreset(presetNumber) {
-            fetch(`getTargetCoordinates.php?targetNo=${presetNumber}`)
+            fetch(`getTargetCoordinates.php?targetNo=${presetNumber}`) // 놀이기구의 좌표를 가져오는 코드
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -81,7 +81,7 @@
         }
 
         function loadPresets() {
-            fetch('getTargetList.php')
+            fetch('getTargetList.php') // 놀이기구 목록을 가져오는 코드
                 .then(response => response.json())
                 .then(data => {
                     const presetContainer = document.getElementById('preset-navigation');

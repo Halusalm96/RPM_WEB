@@ -1,3 +1,7 @@
+<?php
+include "../auth_check.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +10,8 @@
     <title>로봇 위치 관제 시스템</title>
     <link rel="stylesheet" href="styles_monitoring.css">
     <link rel="stylesheet" href="/styles_back.css">
+    <script src="../modal.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -37,8 +43,8 @@
             <div class="right-panel">
                 <!-- 카메라 이미지 표시 -->
                 <iframe src="./camera.html" style="width: 400px; height: 300px; border: none;"></iframe>
-                <!-- <iframe src="./camera_cv.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
-                <!-- <iframe src="./camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
+                <!-- <iframe src="/opencv/camera_cv.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
+                <!-- <iframe src="/opencv/camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
             </div>
         </div>
     </div>

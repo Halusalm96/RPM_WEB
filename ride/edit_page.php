@@ -2,22 +2,13 @@
 session_start();
 
 include "../db_conn.php";
+include "./auth_check_ride.php";
 
 // 수정할 놀이기구 ID를 가져옵니다.
 $target_no = $_GET['target_no'];
 
 // 세션에 저장된 사용자 역할(role) 확인
 $role = $_SESSION['role'];
-
-// 세션에 저장된 관리자 코드와 접근하려는 놀이기구의 키 확인
-if ($role !== '총관리자' && $_SESSION['target_no'] != $target_no) {
-    echo "<script>
-            document.addEventListener('DOMContentLoaded', function() {
-                showModal('권한이 부족하여 접근할 수 없습니다.', '/login/main_page.php');
-            });
-          </script>";
-    exit;
-}
 
 // 해당 ID의 놀이기구 정보를 조회합니다.
 $sql = "SELECT * FROM target WHERE target_no = '$target_no'";
@@ -52,6 +43,7 @@ if ($result->num_rows > 0) {
     <title>놀이기구 정보 수정</title>
     <link rel="stylesheet" href="styles_update.css">
     <link rel="stylesheet" href="/styles_back.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../modal.js"></script>
     <script>

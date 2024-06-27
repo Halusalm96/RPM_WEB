@@ -1,3 +1,7 @@
+<?php
+include "../auth_check.php";
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,6 +9,8 @@
     <title>이용권 관리</title>
     <link rel="stylesheet" href="styles_ticket.css">
     <link rel="stylesheet" href="/styles_home.css">
+    <script src="../modal.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="container">

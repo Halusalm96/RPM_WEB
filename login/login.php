@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role'] = $role;
             if (isset($target_no)) {
                 $_SESSION['target_no'] = $target_no;
+                $_SESSION['entered_manager_code'][$target_no] = $admin_code; // 관리자 코드를 세션에 저장
             }
 
             // 데이터베이스 역할(role) 업데이트

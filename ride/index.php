@@ -1,3 +1,7 @@
+<?php
+include "../auth_check.php";
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,7 +9,7 @@
     <title>놀이공원 관리 시스템</title>
     <link rel="stylesheet" href="styles_ride.css">
     <link rel="stylesheet" href="/styles_home.css">
-
+    <script src="../modal.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -26,7 +30,6 @@
         });
     </script>
 </head>
-<script src="../modal.js"></script>
 <body>
     <div class="container">
         <div class="header">
