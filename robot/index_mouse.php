@@ -1,3 +1,5 @@
+<!-- 마우스 위치 좌표 오차가 심한 상태 / 개선하지 않는다면 사용하기 어려울 듯-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,12 +46,6 @@
                 <!-- <iframe src="/opencv/camera_cv.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
                 <!-- <iframe src="/opencv/camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
             </div>
-        </div>
-
-        <!-- 미니맵 컨테이너 -->
-        <div class="mini-map-container">
-            <canvas id="miniMapCanvas" width="200" height="160"></canvas>
-            <div id="miniMapMarker"></div>
         </div>
     </div>
 
@@ -218,8 +214,8 @@
 
             // 좌표를 맵의 해상도에 맞게 계산 (예시로 0.05 해상도를 사용)
             var resolution = 0.05;
-            var offsetX = 385;
-            var offsetY = 38;
+            var offsetX = 377;
+            var offsetY = 40;
             var mapX = ((x - offsetX) * resolution).toFixed(2);
             var mapY = ((mapCanvas.height - y - offsetY) * resolution).toFixed(2);
 
@@ -240,43 +236,6 @@
                 mousePositionInfo.style.display = 'none'; // 숨기기
             }
         });
-
-        // 미니맵 업데이트 함수
-        function updateMiniMap() {
-            var miniMapCanvas = document.getElementById('miniMapCanvas');
-            if (!miniMapCanvas) {
-                console.error('Mini map canvas element not found');
-                return;
-            }
-            var ctx = miniMapCanvas.getContext('2d');
-
-            var mapImage = new Image();
-            mapImage.src = 'map_fun_mini.jpg'; // 미니맵 이미지 경로 설정
-            mapImage.onload = function() {
-                ctx.clearRect(0, 0, miniMapCanvas.width, miniMapCanvas.height);
-                ctx.drawImage(mapImage, 0, 0, miniMapCanvas.width, miniMapCanvas.height);
-
-                // 로봇 위치 표시
-                var resolution = 0.05;
-                var offsetX = 0;
-                var offsetY = 0;
-
-                var robotMiniMapX = (robotX / resolution) + offsetX;
-                var robotMiniMapY = miniMapCanvas.height - ((robotY / resolution) + offsetY);
-
-                ctx.beginPath();
-                ctx.arc(robotMiniMapX, robotMiniMapY, 2, 0, 2 * Math.PI);
-                ctx.fillStyle = 'green';
-                ctx.fill();
-            };
-        }
-
-        // 초기 호출
-        updateMiniMap(); // 미니맵 초기화
-
-        // 주기적으로 미니맵 업데이트
-        setInterval(updateMiniMap, 1000); // 예시로 1초마다 업데이트
-
     </script>
 </body>
 </html>

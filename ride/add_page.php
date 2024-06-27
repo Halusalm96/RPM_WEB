@@ -10,8 +10,8 @@ include "../auth_check.php";
     <link rel="stylesheet" href="styles_update.css">
     <link rel="stylesheet" href="/styles_back.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../modal.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../modal.js"></script>
 <script>
     $(document).ready(function() {
         // 데이터 로드
