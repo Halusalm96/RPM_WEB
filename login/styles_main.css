@@ -13,9 +13,9 @@ body {
 
 .container {
   width: 90%;
-  max-width: 600px;
+  max-width: 1000px;
   height: 90%;
-  max-height: 400px;
+  max-height: 500px;
   margin: 20px auto;
   padding: 20px;
   background-color: #ffffff;

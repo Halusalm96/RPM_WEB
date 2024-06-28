@@ -18,7 +18,9 @@
         <div class="back-button">
             <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
         </div>
-
+        <div class="data-table">
+                <iframe src="./cv_data.php" style="width: 400px; height: 150px; border: none;"></iframe>
+        </div>
         <div class="main-content">
             <!-- 카메라 이미지 표시 -->
             <!-- <iframe src="./camera.html" style="width: 400px; height: 300px; border: none;"></iframe> -->
