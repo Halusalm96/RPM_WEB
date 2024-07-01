@@ -2,8 +2,15 @@
 session_start();
 include "../db_conn.php"; // 데이터베이스 연결 파일 경로에 따라 수정 필요
 
-// 게시글 목록 조회 쿼리
-$sql = "SELECT * FROM board ORDER BY created_date DESC";
+// 페이지네이션 설정
+$items_per_page = 5; // 한 페이지 당 보여질 게시글 수
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1; // 현재 페이지, 기본값은 1
+
+// 표시할 항목의 시작 인덱스 계산
+$start = ($current_page - 1) * $items_per_page;
+
+// 게시글 목록 조회 쿼리 (페이지네이션 추가)
+$sql = "SELECT * FROM board ORDER BY created_date DESC LIMIT $start, $items_per_page";
 $result = $conn->query($sql);
 ?>
 
@@ -14,62 +21,11 @@ $result = $conn->query($sql);
   <title>게시판 리스트</title>
   <link rel="stylesheet" href="/styles_home.css">
   <link rel="stylesheet" href="styles_posts.css">
+  <link rel="stylesheet" href="styles_page.css">
   <link rel="stylesheet" href="/login/styles_login.css">
-  <link rel="stylesheet" href="styles_edit.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0;
-      padding: 20px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-    }
-    h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #dddddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    .login-link {
-      text-align: right;
-      margin-bottom: 10px;
-    }
-    .login-link a {
-      margin-left: 10px;
-    }
-    .edit-button {
-      text-align: center;
-    }
-    .edit-button a {
-      display: inline-block;
-      padding: 5px 10px;
-      background-color: #4CAF50;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-    }
-    .edit-cell, .delete-cell {
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles_add.css">
+  <link rel="stylesheet" href="/menu/styles_menu.css">
+  <script src="/menu/scripts.js"></script>
 </head>
 <body>
   <div class="container">
@@ -145,6 +101,38 @@ $result = $conn->query($sql);
         ?>
       </tbody>
     </table>
+
+    <!-- 페이지네이션 UI -->
+    <div class="pagination">
+      <?php
+      // 전체 게시글 수 가져오기
+      $total_query = "SELECT COUNT(*) AS total FROM board";
+      $total_result = $conn->query($total_query);
+      $total_rows = $total_result->fetch_assoc()['total'];
+
+      // 전체 페이지 수 계산
+      $total_pages = ceil($total_rows / $items_per_page);
+
+      // 이전 페이지 링크
+      if ($current_page > 1) {
+          echo "<a href='?page=" . ($current_page - 1) . "'>이전</a>";
+      }
+
+      // 페이지 번호 링크
+      for ($i = 1; $i <= $total_pages; $i++) {
+          if ($i == $current_page) {
+              echo "<span>$i</span>";
+          } else {
+              echo "<a href='?page=$i'>$i</a>";
+          }
+      }
+
+      // 다음 페이지 링크
+      if ($current_page < $total_pages) {
+          echo "<a href='?page=" . ($current_page + 1) . "'>다음</a>";
+      }
+      ?>
+    </div>
   </div>
 </body>
 </html>

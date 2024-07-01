@@ -214,8 +214,8 @@
 
             // 좌표를 맵의 해상도에 맞게 계산 (예시로 0.05 해상도를 사용)
             var resolution = 0.05;
-            var offsetX = 377;
-            var offsetY = 40;
+            var offsetX = 375;
+            var offsetY = 45;
             var mapX = ((x - offsetX) * resolution).toFixed(2);
             var mapY = ((mapCanvas.height - y - offsetY) * resolution).toFixed(2);
 

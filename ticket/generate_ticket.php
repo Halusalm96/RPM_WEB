@@ -33,7 +33,7 @@ if ($stmt->execute()) {
     $stmt->close();
     $conn->close();
     // 새로 생성된 티켓을 포함한 표를 다시 표시하기 위해 리다이렉트
-    header('Location: index.php');
+    header('Location: qr_page_code.php');
     exit;
 } else {
     echo "Error: " . $stmt->error;

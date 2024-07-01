@@ -27,8 +27,8 @@ session_start();
     </div>
     <h2>RPM Main</h2>
     <div class="button-container">
-      <button onclick="location.href='/opencv/cv.php'">CV test</button>
-       <button onclick="location.href='/mobile'">mobile test</button>
+      <!-- <button onclick="location.href='/opencv/cv.php'">CV test</button> -->
+      <!-- <button onclick="location.href='/mobile'">mobile test</button> -->
       <?php if (isset($_SESSION['role']) && $_SESSION['role'] == '직원'): ?>
         <button onclick="location.href='/posts/posts.php'">게시판</button>
       <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == '총관리자'): ?>
