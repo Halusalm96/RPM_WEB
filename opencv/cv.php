@@ -24,8 +24,8 @@
         <div class="main-content">
             <!-- 카메라 이미지 표시 -->
             <!-- <iframe src="./camera.html" style="width: 400px; height: 300px; border: none;"></iframe> -->
-            <iframe src="./camera_cv.html" style="width: 400px; height: 300px; border: none;"></iframe>
-            <!-- <iframe src="./camera_pi.html" style="width: 400px; height: 300px; border: none;"></iframe> -->
+            <!-- <iframe src="./camera_cv.html" style="width: 400px; height: 300px; border: none;"></iframe> -->
+            <iframe src="./camera_pi.html" style="width: 400px; height: 300px; border: none;"></iframe>
         </div>
     </div>
 </body>

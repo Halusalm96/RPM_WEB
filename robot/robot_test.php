@@ -6,8 +6,19 @@
     <title>로봇 위치 관제 시스템</title>
     <link rel="stylesheet" href="styles_monitoring.css">
     <link rel="stylesheet" href="/styles_back.css">
-    <script src="../modal.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .map-container {
+            position: relative;
+            width: 450px; /* 보여줄 맵 이미지의 가로 크기 */
+            height: 390px; /* 보여줄 맵 이미지의 세로 크기 */
+            overflow: hidden; /* 영역을 벗어나는 부분은 숨김 */
+        }
+        #mapCanvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -33,8 +44,6 @@
                     <canvas id="mapCanvas" width="491" height="390"></canvas>
                     <!-- 맵 위에 배치할 정보 -->
                     <div id="additionalInfo" class="additional-info"></div>
-                    <!-- 마우스 위치 좌표 표시 -->
-                    <div id="mousePositionInfo" class="additional-info" style="display: none;"></div>
                 </div>
             </div>
 
@@ -44,12 +53,6 @@
                 <!-- <iframe src="/opencv/camera_cv.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
                 <!-- <iframe src="/opencv/camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
             </div>
-        </div>
-
-        <!-- 미니맵 컨테이너 -->
-        <div class="mini-map-container">
-            <canvas id="miniMapCanvas" width="200" height="160"></canvas>
-            <div id="miniMapMarker"></div>
         </div>
     </div>
 
@@ -159,7 +162,7 @@
             mapImage.src = 'map_fun.jpg';
             mapImage.onload = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(mapImage, 0, 0, canvas.width, canvas.height);
+                ctx.drawImage(mapImage, 0, 0, 600, 400, 0, 0, canvas.width, canvas.height);
 
                 var resolution = 0.05;
                 var offsetX = 385;
@@ -206,77 +209,6 @@
             additionalInfo.style.left = infoLeft + 'px';
             additionalInfo.style.top = infoTop + 'px';
         }
-
-        // 맵 캔버스 요소
-        var mapCanvas = document.getElementById('mapCanvas');
-
-        // 마우스가 맵 캔버스 위에 있을 때 이벤트 리스너 추가
-        mapCanvas.addEventListener('mousemove', function(e) {
-            var rect = mapCanvas.getBoundingClientRect();
-            var x = e.clientX - rect.left; // 마우스 X 좌표
-            var y = e.clientY - rect.top; // 마우스 Y 좌표
-
-            // 좌표를 맵의 해상도에 맞게 계산 (예시로 0.05 해상도를 사용)
-            var resolution = 0.05;
-            var offsetX = 385;
-            var offsetY = 38;
-            var mapX = ((x - offsetX) * resolution).toFixed(2);
-            var mapY = ((mapCanvas.height - y - offsetY) * resolution).toFixed(2);
-
-            // 추가 정보 엘리먼트 업데이트
-            var mousePositionInfo = document.getElementById('mousePositionInfo');
-            if (mousePositionInfo) {
-                mousePositionInfo.textContent = '마우스 위치 좌표: X=' + mapX + ', Y=' + mapY;
-                mousePositionInfo.style.left = (x + 10) + 'px'; // 마우스 위치에서 오른쪽으로 10px 이동
-                mousePositionInfo.style.top = (y + 10) + 'px'; // 마우스 위치에서 아래로 10px 이동
-                mousePositionInfo.style.display = 'block'; // 표시
-            }
-        });
-
-        // 맵 캔버스에서 마우스가 벗어날 때 추가 정보 숨기기
-        mapCanvas.addEventListener('mouseout', function() {
-            var mousePositionInfo = document.getElementById('mousePositionInfo');
-            if (mousePositionInfo) {
-                mousePositionInfo.style.display = 'none'; // 숨기기
-            }
-        });
-
-        // 미니맵 업데이트 함수
-        function updateMiniMap() {
-            var miniMapCanvas = document.getElementById('miniMapCanvas');
-            if (!miniMapCanvas) {
-                console.error('Mini map canvas element not found');
-                return;
-            }
-            var ctx = miniMapCanvas.getContext('2d');
-
-            var mapImage = new Image();
-            mapImage.src = 'map_fun_mini.jpg'; // 미니맵 이미지 경로 설정
-            mapImage.onload = function() {
-                ctx.clearRect(0, 0, miniMapCanvas.width, miniMapCanvas.height);
-                ctx.drawImage(mapImage, 0, 0, miniMapCanvas.width, miniMapCanvas.height);
-
-                // 로봇 위치 표시
-                var resolution = 0.05;
-                var offsetX = 0;
-                var offsetY = 0;
-
-                var robotMiniMapX = (robotX / resolution) + offsetX;
-                var robotMiniMapY = miniMapCanvas.height - ((robotY / resolution) + offsetY);
-
-                ctx.beginPath();
-                ctx.arc(robotMiniMapX, robotMiniMapY, 2, 0, 2 * Math.PI);
-                ctx.fillStyle = 'green';
-                ctx.fill();
-            };
-        }
-
-        // 초기 호출
-        updateMiniMap(); // 미니맵 초기화
-
-        // 주기적으로 미니맵 업데이트
-        setInterval(updateMiniMap, 1000); // 예시로 1초마다 업데이트
-
     </script>
 </body>
 </html>

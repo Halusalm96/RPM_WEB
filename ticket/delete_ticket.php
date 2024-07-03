@@ -1,39 +1,27 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_ticket'])) {
+// db_conn.php를 include하여 데이터베이스 연결 설정을 가져옴
+include "../db_conn.php";
+
+// POST로 전달된 티켓 번호 받기
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ticket_no'])) {
     $ticket_no = $_POST['ticket_no'];
-    
-    // 티켓 정보 조회
-    $sql_select = "SELECT * FROM ticket WHERE ticket_no = $ticket_no";
-    $result_select = $conn->query($sql_select);
-    
-    if ($result_select->num_rows > 0) {
-        $row_select = $result_select->fetch_assoc();
-        $ticket_qr = $row_select['ticket_qr'];
-        
-        // 티켓 레코드 삭제
-        $sql_delete = "DELETE FROM ticket WHERE ticket_no = $ticket_no";
-        if ($conn->query($sql_delete) === TRUE) {
-            // QR 코드 파일 삭제
-            if (file_exists($ticket_qr)) {
-                unlink($ticket_qr); // 파일 삭제
-            }
-            
-            // 삭제 후에 AUTO_INCREMENT 값을 설정하는 쿼리 실행
-            $sql_auto = "ALTER TABLE ticket AUTO_INCREMENT = 1";
-            if ($conn->query($sql_auto) === TRUE) {
-                echo "<script>alert('티켓이 성공적으로 삭제되었습니다.');
-                      window.location.replace('index.php');
-                      </script>";
-                exit; // 리디렉션 후 스크립트 실행 중지
-            } else {
-                echo "Error: " . $sql_auto . "<br>" . $conn->error;
-            }
-            
-        } else {
-            echo "Error: " . $sql_delete . "<br>" . $conn->error;
-        }
+
+    // 티켓 삭제 SQL 쿼리
+    $delete_query = "DELETE FROM ticket WHERE ticket_no = $ticket_no";
+
+    if ($conn->query($delete_query) === TRUE) {
+        // 삭제 성공 시 처리할 내용
+        echo "<script>alert('티켓이 성공적으로 삭제되었습니다.');
+                window.location.replace('qr_page_code.php');
+                </script>";
     } else {
-        echo "해당하는 티켓이 존재하지 않습니다.";
+        // 삭제 실패 시 처리할 내용
+        echo "<script>alert('삭제 중 오류가 발생하였습니다.');
+                window.location.replace('qr_page_code.php');
+                </script>";
     }
 }
+
+// 데이터베이스 연결 종료
+$conn->close();
 ?>

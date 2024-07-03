@@ -1,5 +1,5 @@
 <?php
-include "../auth_check.php";
+include "../auth/auth_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +11,8 @@ include "../auth_check.php";
     <link rel="stylesheet" href="/styles_home.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../modal.js"></script>
+    <link rel="stylesheet" href="/menu/styles_menu.css">
+    <script src="/menu/scripts.js"></script>
 </head>
 <body>
     <div class="container">

@@ -1,7 +1,7 @@
 .admin-button {
     font-size: 14px;
     padding: 5px 10px;
-    background-color: #4CAF50;
+    background-color: #0d1b2a;
     color: white;
     border: none;
     cursor: pointer;
@@ -12,7 +12,7 @@
   }
 
   .admin-button:hover {
-    background-color: #45a049; /* 호버 시 배경색 변경 */
+    background-color: #1a2e44; /* 호버 시 배경색 변경 */
   }
 
   .container {

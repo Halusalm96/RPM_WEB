@@ -55,6 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_post'])) {
   <link rel="stylesheet" href="styles_write_post.css">
   <link rel="stylesheet" href="/styles_back.css">
   <link rel="stylesheet" href="/login/styles_login.css">
+  <link rel="stylesheet" href="/menu/styles_menu.css">
+  <script src="/menu/scripts.js"></script>
 </head>
 <body>
   <div class="container">
