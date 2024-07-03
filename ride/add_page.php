@@ -1,5 +1,5 @@
 <?php
-include "../auth/auth_check.php";
+include "../auth_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -7,12 +7,11 @@ include "../auth/auth_check.php";
 <head>
     <meta charset="UTF-8">
     <title>놀이공원 관리 시스템</title>
-    <link rel="stylesheet" href="/ride/styles_update.css">
+    <link rel="stylesheet" href="styles_update.css">
     <link rel="stylesheet" href="/styles_back.css">
-    <link rel="stylesheet" href="/menu/styles_menu.css">
-    <script src="/menu/scripts.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/modal.js"></script>
+    <script src="../modal.js"></script>
 <script>
     $(document).ready(function() {
         // 데이터 로드
@@ -41,14 +40,14 @@ include "../auth/auth_check.php";
         $('#add-form').submit(function(event){
             event.preventDefault();
             $.ajax({
-                url: '/ride/target_add.php',
+                url: 'target_add.php',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
                     alert('놀이기구가 추가되었습니다.');
                     loadTable();
                     $('.add-form').hide();
-                    window.location.replace('/ride/index.php'); // 다른 페이지로 이동
+                    window.location.replace('index.php'); // 다른 페이지로 이동
                 },
                 error: function() {
                     alert('놀이기구 추가에 실패했습니다.');
@@ -63,7 +62,7 @@ include "../auth/auth_check.php";
         <div class="right-panel">
         <h2>놀이기구 추가</h2>
         <div class="back-button">
-            <img src="/ride/icon/back.png" alt="뒤로가기" onclick="history.back()">
+            <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
         </div>
         <form id="add-form" class="add-form">
                 <div class="form-group">

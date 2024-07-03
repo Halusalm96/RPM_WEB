@@ -2,7 +2,7 @@
 session_start();
 
 include "../db_conn.php";
-include "../auth/auth_check_ride.php";
+include "./auth_check_ride.php";
 
 // 수정할 놀이기구 ID를 가져옵니다.
 $target_no = $_GET['target_no'];
@@ -41,10 +41,9 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <title>놀이기구 정보 수정</title>
-    <link rel="stylesheet" href="/ride/styles_update.css">
+    <link rel="stylesheet" href="styles_update.css">
     <link rel="stylesheet" href="/styles_back.css">
-    <link rel="stylesheet" href="/menu/styles_menu.css">
-    <script src="/menu/scripts.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../modal.js"></script>
     <script>
@@ -53,7 +52,7 @@ if ($result->num_rows > 0) {
             $('#edit-form').submit(function(event){
                 event.preventDefault();
                 $.ajax({
-                    url: '/ride/target_update.php',
+                    url: 'target_update.php',
                     type: 'POST',
                     data: $(this).serialize(),
                     success: function(response) {
@@ -80,7 +79,7 @@ if ($result->num_rows > 0) {
         <div class="right-panel">
             <h2>놀이기구 정보 수정</h2>
             <div class="back-button">
-                <img src="/ride/icon/back.png" alt="뒤로가기" onclick="history.back()">
+                <img src="./icon/back.png" alt="뒤로가기" onclick="history.back()">
             </div>
             <form id="edit-form" class="edit-form" method="post">
                 <input type="hidden" id="edit_target_no" name="target_no" value="<?php echo $target_no; ?>">

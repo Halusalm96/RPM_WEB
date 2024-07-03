@@ -42,7 +42,7 @@ body {
   input[type="submit"] {
     width: 100%;
     padding: 10px;
-    background-color: #0d1b2a;
+    background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
@@ -52,7 +52,7 @@ body {
   }
 
   input[type="submit"]:hover {
-    background-color: #1a2e44; /* 호버 시 배경색 변경 */
+    background-color: #45a049; /* 호버 시 배경색 변경 */
   }
   
   

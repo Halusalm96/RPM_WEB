@@ -1,117 +1,50 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-}
-
-.container {
-  width: 90%;
-  max-width: 800px; /* 더 넓은 폭 */
-  height: auto; /* 높이 자동 조정 */
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  border: 1px solid #dddddd;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-.login-link {
-  text-align: right;
-  margin-bottom: 10px;
-}
-
-.login-link a {
-  margin-left: 10px;
-}
-
-.edit-button {
-  text-align: center;
-}
-
-.edit-button a {
-  display: inline-block;
-  padding: 5px 10px;
-  background-color: #0d1b2a;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.edit-cell, .delete-cell {
-  text-align: center;
-}
-
-.post-list {
-  margin-top: 20px;
-}
-
-.post-item {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.post-item h3 {
-  font-size: 20px;
-  margin-bottom: 5px;
-}
-
-.post-item p {
-  margin-bottom: 5px;
-}
-
-
-.pagination {
-  margin-top: 20px; /* 페이지네이션과 위쪽 여백 설정 */
-  text-align: center; /* 페이지네이션 링크들을 가운데 정렬 */
-}
-
-.pagination a, .pagination span {
-  display: inline-block;
-  padding: 8px 12px; /* 링크 내부의 패딩 설정 (상하 8px, 좌우 12px) */
-  margin: 0 4px; /* 링크 간의 좌우 여백 설정 */
-  font-weight: bold; /* 글꼴 두껍게 설정 */
-  text-decoration: none; /* 링크 텍스트에 밑줄 제거 */
-  color: #333; /* 링크 텍스트 색상 설정 */
-  border: 1px solid #ccc; /* 링크 테두리 설정 */
-  border-radius: 4px; /* 링크 테두리의 둥근 모서리 설정 */
-}
-
-.pagination a:hover {
-  background-color: #f0f0f0; /* 링크에 마우스를 올렸을 때 배경색 변경 */
-}
-
-.pagination span {
-  background-color: #f0f0f0; /* 현재 페이지를 나타내는 span 요소의 배경색 설정 */
-  border: 1px solid #ccc; /* 현재 페이지 링크의 테두리 설정 */
-}
+    font-family: Arial, sans-serif;
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 800px; /* 더 넓은 폭 */
+    height: auto; /* 높이 자동 조정 */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .post-list {
+    margin-top: 20px;
+  }
+  
+  .post-item {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .post-item h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .post-item p {
+    margin-bottom: 5px;
+  }
+  

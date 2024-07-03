@@ -26,9 +26,61 @@ if (isset($_GET['id'])) {
   <link rel="stylesheet" href="styles_posts.css">
   <link rel="stylesheet" href="/login/styles_login.css">
   <link rel="stylesheet" href="/styles_back.css">
-  <link rel="stylesheet" href="styles_view_post.css">
-  <link rel="stylesheet" href="/menu/styles_menu.css">
-  <script src="/menu/scripts.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .login-link {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+    .login-link a {
+      margin-left: 10px;
+    }
+    .post-info {
+      text-align: left;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .post-content {
+      border: 1px solid #dddddd;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      text-align: left;
+    }
+    .edit-button {
+      margin-top: 20px;
+    }
+
+    .edit-button a:hover {
+      background-color: #45a049; /* 호버 시 배경색 변경 */
+    }
+    .edit-button a {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+  </style>
 </head>
 <body>
   <div class="container">

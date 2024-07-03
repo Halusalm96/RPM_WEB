@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "/db_conn.php"; // 데이터베이스 연결 파일 경로에 따라 수정 필요
+include "../db_conn.php"; // 데이터베이스 연결 파일 경로에 따라 수정 필요
 
 // 게시글 키를 받아옴
 if (isset($_GET['id'])) {
@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
 
     if ($stmt->execute()) {
         echo '<script>alert("놀이기구가 성공적으로 삭제되었습니다.");</script>';
-        echo '<script>window.location.href = "/ride/index.php";</script>';
+        echo '<script>window.location.href = "index.php";</script>';
         exit();
     } else {
         echo "놀이기구 삭제 중 오류가 발생했습니다.";

@@ -1,5 +1,5 @@
 <?php
-include "../auth/auth_check_high.php";
+include "../auth_check_high.php";
 ?>
 
 <!DOCTYPE html>
@@ -7,18 +7,16 @@ include "../auth/auth_check_high.php";
 <head>
     <meta charset="UTF-8">
     <title>놀이기구 관리자 페이지</title>
-    <link rel="stylesheet" href="/ride/styles_admin.css">
+    <link rel="stylesheet" href="styles_admin.css">
     <link rel="stylesheet" href="/styles_home.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/modal.js"></script>
-    <link rel="stylesheet" href="/menu/styles_menu.css">
-    <script src="/menu/scripts.js"></script>
+    <script src="../modal.js"></script>
 </head>
 <body>
     <div class="container">
         <h1 class="admin-title">놀이기구 관리자 페이지</h1>
         <div class="home-button">
-            <a href="/login/main_page.php"><img src="/ride/icon/home.png" alt="메인메뉴"></a>
+            <a href="/login/main_page.php"><img src="./icon/home.png" alt="메인메뉴"></a>
         </div>
         <div id="target-table">
             <table>
@@ -31,7 +29,7 @@ include "../auth/auth_check_high.php";
                 </thead>
                 <tbody>
                     <?php
-                    include '../ride/functions.php'; // 위에서 작성한 함수 포함
+                    include 'functions.php'; // 위에서 작성한 함수 포함
                     
                     $targets = getAllTargets();
                     foreach ($targets as $target) {
@@ -50,7 +48,7 @@ include "../auth/auth_check_high.php";
     <script>
         function generateNewCode(targetNo) {
             if (confirm("정말로 새로운 코드를 생성하시겠습니까?")) {
-                fetch('/ride/generate_code.php?target_no=' + targetNo)
+                fetch('generate_code.php?target_no=' + targetNo)
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
