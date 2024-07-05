@@ -107,7 +107,7 @@
         </div>
 
     </div>
-
+    <iframe src="/opencv/cv_data.php" style="width: 300px; height: 120px; border: none;"></iframe>
     <script src="https://cdn.jsdelivr.net/npm/roslib@1.1.0/build/roslib.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -202,6 +202,11 @@
             }
         });
 
+        // 위치 계산
+        var resolution = 0.05;
+        var offsetX = 205;
+        var offsetY = 200;
+
         function updateCanvas() {
             var canvas = document.getElementById('mapCanvas');
             if (!canvas) {
@@ -211,14 +216,10 @@
             var ctx = canvas.getContext('2d');
 
             var mapImage = new Image();
-            mapImage.src = 'map_fun.jpg';
+            mapImage.src = 'map_rpm.jpg';
             mapImage.onload = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(mapImage, 0, 0, canvas.width, canvas.height);
-
-                var resolution = 0.05;
-                var offsetX = 205;
-                var offsetY = 200;
 
                 var robotCanvasX = (robotX / resolution) + offsetX;
                 var robotCanvasY = canvas.height - ((robotY / resolution) + offsetY);
@@ -253,10 +254,6 @@
             var infoText = '로봇 현재 위치: X=' + robotX.toFixed(2) + ', Y=' + robotY.toFixed(2);
             additionalInfo.textContent = infoText;
 
-            // 위치 계산
-            var resolution = 0.05;
-            var offsetX = 205;
-            var offsetY = 200;
             var infoLeft = (robotX / resolution) + offsetX + 10; // 왼쪽으로 10px 이동
             var infoTop = canvas.height - ((robotY / resolution) + offsetY) + 10; // 아래로 10px 이동
 
@@ -268,9 +265,9 @@
         var mapCanvas = document.getElementById('mapCanvas');
 
         // 마우스 파라미터(로봇위치와의 오차가 생각보다 크다.)
-        var mouseResolution = 0.0512;
-        var mouseOffsetX = 375;
-        var mouseOffsetY = 45;
+        var mouseResolution = 0.0522;
+        var mouseOffsetX = (offsetX - (18));
+        var mouseOffsetY = (offsetY + (14));
 
         // 마우스가 맵 캔버스 위에 있을 때 이벤트 리스너 추가
         mapCanvas.addEventListener('mousemove', function(e) {
@@ -365,16 +362,16 @@
             var angular = 0.0;
 
             if (keyState['ArrowUp']) {
-                linear += 0.25;
+                linear += 0.5;
             }
             if (keyState['ArrowDown']) {
-                linear -= 0.25;
+                linear -= 0.5;
             }
             if (keyState['ArrowLeft']) {
-                angular += 0.5;
+                angular += 2.5;
             }
             if (keyState['ArrowRight']) {
-                angular -= 0.5;
+                angular -= 2.5;
             }
 
             publishTwist(linear, angular);

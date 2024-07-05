@@ -9,51 +9,10 @@ include "../auth/auth_check.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로봇 위치 관제 시스템</title>
     <link rel="stylesheet" href="/robot/styles_monitoring.css">
+    <link rel="stylesheet" href="/robot/styles_keyboard.css">
     <link rel="stylesheet" href="/styles_home.css">
     <link rel="stylesheet" href="/menu/styles_menu.css">
-    <style>
-        /* 추가된 스타일 */
-        .keyboard-viewer {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
 
-        .keyboard-viewer h3 {
-            margin-top: 0;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .keyboard-viewer ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .keyboard-viewer li {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 1px solid #999;
-            text-align: center;
-            line-height: 50px;
-            margin: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s ease-out;
-        }
-
-        .keyboard-viewer li.active {
-            background-color: #5e5e5e;
-            color: white;
-        }
-    </style>
     <script src="/menu/scripts.js"></script>
     <script src="../modal.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -105,9 +64,10 @@ include "../auth/auth_check.php";
                 <li class="key-right">→</li>
             </ul>
         </div>
+        
 
     </div>
-
+    <iframe src="/opencv/cv_data.php" style="width: 300px; height: 120px; border: none;"></iframe>
     <script src="https://cdn.jsdelivr.net/npm/roslib@1.1.0/build/roslib.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -202,6 +162,11 @@ include "../auth/auth_check.php";
             }
         });
 
+
+        var resolution = 0.05;
+        var offsetX = 385;
+        var offsetY = 38;
+        
         function updateCanvas() {
             var canvas = document.getElementById('mapCanvas');
             if (!canvas) {
@@ -215,10 +180,6 @@ include "../auth/auth_check.php";
             mapImage.onload = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(mapImage, 0, 0, canvas.width, canvas.height);
-
-                var resolution = 0.05;
-                var offsetX = 385;
-                var offsetY = 38;
 
                 var robotCanvasX = (robotX / resolution) + offsetX;
                 var robotCanvasY = canvas.height - ((robotY / resolution) + offsetY);
@@ -253,10 +214,6 @@ include "../auth/auth_check.php";
             var infoText = '로봇 현재 위치: X=' + robotX.toFixed(2) + ', Y=' + robotY.toFixed(2);
             additionalInfo.textContent = infoText;
 
-            // 위치 계산
-            var resolution = 0.05;
-            var offsetX = 385;
-            var offsetY = 38;
             var infoLeft = (robotX / resolution) + offsetX + 10; // 왼쪽으로 10px 이동
             var infoTop = canvas.height - ((robotY / resolution) + offsetY) + 10; // 아래로 10px 이동
 
@@ -268,9 +225,9 @@ include "../auth/auth_check.php";
         var mapCanvas = document.getElementById('mapCanvas');
 
         // 마우스 파라미터(로봇위치와의 오차가 생각보다 크다.)
-        var mouseResolution = 0.0512;
-        var mouseOffsetX = 375;
-        var mouseOffsetY = 45;
+        var mouseResolution = 0.0522;
+        var mouseOffsetX = (offsetX - (18));
+        var mouseOffsetY = (offsetY + (14));
 
         // 마우스가 맵 캔버스 위에 있을 때 이벤트 리스너 추가
         mapCanvas.addEventListener('mousemove', function(e) {
