@@ -10,50 +10,8 @@
     <title>로봇 위치 관제 시스템</title>
     <link rel="stylesheet" href="/robot/styles_monitoring.css">
     <link rel="stylesheet" href="/styles_home.css">
+    <link rel="stylesheet" href="/robot/styles_keyboard.css">
     <link rel="stylesheet" href="/menu/styles_menu.css">
-    <style>
-        /* 추가된 스타일 */
-        .keyboard-viewer {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .keyboard-viewer h3 {
-            margin-top: 0;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .keyboard-viewer ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .keyboard-viewer li {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 1px solid #999;
-            text-align: center;
-            line-height: 50px;
-            margin: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s ease-out;
-        }
-
-        .keyboard-viewer li.active {
-            background-color: #5e5e5e;
-            color: white;
-        }
-    </style>
     <script src="/menu/scripts.js"></script>
     <script src="../modal.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -79,7 +37,7 @@
             <div class="left-panel">
                 <!-- 맵 컨테이너 -->
                 <div class="map-container">
-                    <canvas id="mapCanvas" width="608" height="640"></canvas>
+                    <canvas id="mapCanvas" width="534" height="416"></canvas>
                     <!-- 맵 위에 배치할 정보 -->
                     <div id="additionalInfo" class="additional-info"></div>
                     <!-- 마우스 위치 좌표 표시 -->
@@ -90,8 +48,8 @@
             <div class="right-panel">
                 <!-- 카메라 이미지 표시 -->
                 <!-- <iframe src="./camera.html" style="width: 491px; height: 390px; border: none;"></iframe> -->
-                <iframe src="/opencv/camera_cv.html" style="width: 100%; height: 300px; border: none;"></iframe>
-                <!-- <iframe src="/opencv/camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
+                <!-- <iframe src="/opencv/camera_cv.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
+                <iframe src="/opencv/camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe>
             </div>
         </div>
 
@@ -204,8 +162,8 @@
 
         // 위치 계산
         var resolution = 0.05;
-        var offsetX = 205;
-        var offsetY = 200;
+        var offsetX = 400;
+        var offsetY = 310;
 
         function updateCanvas() {
             var canvas = document.getElementById('mapCanvas');
@@ -216,7 +174,7 @@
             var ctx = canvas.getContext('2d');
 
             var mapImage = new Image();
-            mapImage.src = 'map_rpm.jpg';
+            mapImage.src = 'map_rpm_2.jpg';
             mapImage.onload = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(mapImage, 0, 0, canvas.width, canvas.height);
@@ -362,16 +320,16 @@
             var angular = 0.0;
 
             if (keyState['ArrowUp']) {
-                linear += 0.5;
+                linear += 0.25;
             }
             if (keyState['ArrowDown']) {
-                linear -= 0.5;
+                linear -= 0.25;
             }
             if (keyState['ArrowLeft']) {
-                angular += 2.5;
+                angular += 0.5;
             }
             if (keyState['ArrowRight']) {
-                angular -= 2.5;
+                angular -= 0.5;
             }
 
             publishTwist(linear, angular);

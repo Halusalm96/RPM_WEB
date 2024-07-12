@@ -16,7 +16,8 @@ session_start();
 
 <div id="menu-container">
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] == '총관리자'): ?>
-        <a class="menu-item" href="/robot/index.php" data-title="로봇 위치 관제 시스템">로봇 관제</a>
+        <a class="menu-item" href="/robot/index_simul.php" data-title="로봇 위치 관제 시스템">로봇 관제</a>
+        <!-- <a class="menu-item" href="/robot" data-title="로봇 위치 관제 시스템">로봇 관제</a> -->
         <a class="menu-item" href="/ride/index.php" data-title="놀이기구 관리">놀이기구 관리</a>
         <a class="menu-item" href="/ticket/index.php" data-title="이용권 관리">이용권 관리</a>
     <?php endif; ?>

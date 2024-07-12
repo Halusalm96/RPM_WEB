@@ -24,13 +24,13 @@
     <script src="https://cdn.jsdelivr.net/npm/roslib@1.1.0/build/roslib.min.js"></script>
     <script>
         var ros = new ROSLIB.Ros({
-            url: 'ws://192.168.123.113:9090'
+            url: 'ws://192.168.0.113:9090'
         });
 
         var imageListener = new ROSLIB.Topic({
             ros: ros,
-            name: 'camera_nodelet2/usb_cam/image_raw/compressed',
-            messageType: 'sensor_msgs/Image'
+            name: '/usb_cam/image_raw/compressed',
+            messageType: 'sensor_msgs/CompressedImage'
         });
 
         imageListener.subscribe(function(message) {

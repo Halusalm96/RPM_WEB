@@ -27,13 +27,14 @@ session_start();
     </div>
     <h2>RPM Main</h2>
     <div class="button-container">
-      <button onclick="location.href='/opencv/cv.php'">CV test</button>
+      <!-- <button onclick="location.href='/opencv/cv.php'">CV test</button>
       <button onclick="location.href='/robot/index_hardware.php'">HW test</button>
-      <button onclick="location.href='/mobile'">mobile test</button>
+      <button onclick="location.href='/mobile'">mobile test</button> -->
       <?php if (isset($_SESSION['role']) && $_SESSION['role'] == '직원'): ?>
         <button onclick="location.href='/posts/posts.php'">게시판</button>
       <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == '총관리자'): ?>
-        <button onclick="location.href='/robot'">로봇 관제</button>
+        <!-- <button onclick="location.href='/robot'">로봇 관제</button> -->
+        <button onclick="location.href='/robot/index_simul.php'">로봇 관제</button>
         <button onclick="location.href='/ride/index.php'">놀이기구 관리</button>
         <button onclick="location.href='/posts/posts.php'">게시판</button>
         <button onclick="location.href='/ticket'">이용권 관리</button>

@@ -48,9 +48,9 @@ include "../auth/auth_check.php";
 
             <div class="right-panel">
                 <!-- 카메라 이미지 표시 -->
-                <!-- <iframe src="./camera.html" style="width: 491px; height: 390px; border: none;"></iframe> -->
+                <iframe src="./camera.html" style="width: 491px; height: 390px; border: none;"></iframe>
                 <!-- <iframe src="/opencv/camera_cv.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
-                <iframe src="/opencv/camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe>
+                <!-- <iframe src="/opencv/camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
             </div>
         </div>
 
@@ -163,9 +163,9 @@ include "../auth/auth_check.php";
         });
 
 
-        var resolution = 0.055;
-        var offsetX = 360;
-        var offsetY = 300;
+        var resolution = 0.05;
+        var offsetX = 385;
+        var offsetY = 38;
         
         function updateCanvas() {
             var canvas = document.getElementById('mapCanvas');
@@ -176,7 +176,7 @@ include "../auth/auth_check.php";
             var ctx = canvas.getContext('2d');
 
             var mapImage = new Image();
-            mapImage.src = 'map_rpm_2.jpg';
+            mapImage.src = 'map_fun.jpg';
             mapImage.onload = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(mapImage, 0, 0, canvas.width, canvas.height);
@@ -225,7 +225,7 @@ include "../auth/auth_check.php";
         var mapCanvas = document.getElementById('mapCanvas');
 
         // 마우스 파라미터(로봇위치와의 오차가 생각보다 크다.)
-        var mouseResolution = 0.0577;
+        var mouseResolution = 0.0522;
         var mouseOffsetX = (offsetX - (18));
         var mouseOffsetY = (offsetY + (14));
 
@@ -322,16 +322,16 @@ include "../auth/auth_check.php";
             var angular = 0.0;
 
             if (keyState['ArrowUp']) {
-                linear += 0.5;
+                linear += 0.25;
             }
             if (keyState['ArrowDown']) {
-                linear -= 0.5;
+                linear -= 0.25;
             }
             if (keyState['ArrowLeft']) {
-                angular += 1.0;
+                angular += 0.5;
             }
             if (keyState['ArrowRight']) {
-                angular -= 1.0;
+                angular -= 0.5;
             }
 
             publishTwist(linear, angular);

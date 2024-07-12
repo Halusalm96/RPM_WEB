@@ -1,5 +1,5 @@
 <?php
-include "../auth/auth_check.php";
+// include "../auth/auth_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -9,10 +9,9 @@ include "../auth/auth_check.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로봇 위치 관제 시스템</title>
     <link rel="stylesheet" href="/robot/styles_monitoring.css">
-    <link rel="stylesheet" href="/robot/styles_keyboard.css">
     <link rel="stylesheet" href="/styles_home.css">
+    <link rel="stylesheet" href="/robot/styles_keyboard.css">
     <link rel="stylesheet" href="/menu/styles_menu.css">
-
     <script src="/menu/scripts.js"></script>
     <script src="../modal.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -38,7 +37,7 @@ include "../auth/auth_check.php";
             <div class="left-panel">
                 <!-- 맵 컨테이너 -->
                 <div class="map-container">
-                    <canvas id="mapCanvas" width="491" height="390"></canvas>
+                    <canvas id="mapCanvas" width="534" height="416"></canvas>
                     <!-- 맵 위에 배치할 정보 -->
                     <div id="additionalInfo" class="additional-info"></div>
                     <!-- 마우스 위치 좌표 표시 -->
@@ -64,7 +63,6 @@ include "../auth/auth_check.php";
                 <li class="key-right">→</li>
             </ul>
         </div>
-        
 
     </div>
     <iframe src="/opencv/cv_data.php" style="width: 300px; height: 120px; border: none;"></iframe>
@@ -72,7 +70,7 @@ include "../auth/auth_check.php";
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         var ros = new ROSLIB.Ros({
-            url: 'ws://192.168.123.118:9090'
+            url: 'ws://192.168.0.28:9090'
         });
 
         ros.on('connection', function() {
@@ -162,11 +160,11 @@ include "../auth/auth_check.php";
             }
         });
 
-
+        // 위치 계산
         var resolution = 0.055;
-        var offsetX = 360;
-        var offsetY = 300;
-        
+        var offsetX = 400;
+        var offsetY = 310;
+
         function updateCanvas() {
             var canvas = document.getElementById('mapCanvas');
             if (!canvas) {
@@ -225,7 +223,7 @@ include "../auth/auth_check.php";
         var mapCanvas = document.getElementById('mapCanvas');
 
         // 마우스 파라미터(로봇위치와의 오차가 생각보다 크다.)
-        var mouseResolution = 0.0577;
+        var mouseResolution = 0.0522;
         var mouseOffsetX = (offsetX - (18));
         var mouseOffsetY = (offsetY + (14));
 
@@ -322,16 +320,16 @@ include "../auth/auth_check.php";
             var angular = 0.0;
 
             if (keyState['ArrowUp']) {
-                linear += 0.5;
+                linear += 0.25;
             }
             if (keyState['ArrowDown']) {
-                linear -= 0.5;
+                linear -= 0.25;
             }
             if (keyState['ArrowLeft']) {
-                angular += 1.0;
+                angular += 0.5;
             }
             if (keyState['ArrowRight']) {
-                angular -= 1.0;
+                angular -= 0.5;
             }
 
             publishTwist(linear, angular);

@@ -44,6 +44,16 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($data['target_name']); ?> 정보</title>
     <link rel="stylesheet" href="styles_ride_info.css">
+
+    <script>
+        function goToAndroidActivity() {
+            if (typeof Android !== 'undefined') {
+                Android.goToAndroidActivity();
+            } else {
+                console.error('Android interface is not available.');
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="info-container">
@@ -72,14 +82,8 @@ $conn->close();
                     <td><?php echo $status; ?></td>
                 </tr>
             </table>
-            <button onclick="location.href='/mobile/index.html'">뒤로가기</button>
+            <button onclick="goToAndroidActivity()">뒤로가기</button>
         </div>
     </div>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
 </body>
 </html>
