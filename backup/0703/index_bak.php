@@ -1,7 +1,3 @@
-<?php
-include "../auth/auth_check.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +5,8 @@ include "../auth/auth_check.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로봇 위치 관제 시스템</title>
     <link rel="stylesheet" href="/robot/styles_monitoring.css">
-    <link rel="stylesheet" href="/robot/styles_keyboard.css">
     <link rel="stylesheet" href="/styles_home.css">
     <link rel="stylesheet" href="/menu/styles_menu.css">
-
     <script src="/menu/scripts.js"></script>
     <script src="../modal.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -53,21 +47,8 @@ include "../auth/auth_check.php";
                 <!-- <iframe src="/opencv/camera_pi.html" style="width: 100%; height: 300px; border: none;"></iframe> -->
             </div>
         </div>
-
-        <!-- 키보드 뷰어 -->
-        <div class="keyboard-viewer" id="keyboardViewer">
-            <h3>키보드 입력 상태</h3>
-            <ul>
-                <li class="key-up">↑</li>
-                <li class="key-down">↓</li>
-                <li class="key-left">←</li>
-                <li class="key-right">→</li>
-            </ul>
-        </div>
-        
-
     </div>
-    <iframe src="/opencv/cv_data.php" style="width: 300px; height: 180px; border: none;"></iframe>
+
     <script src="https://cdn.jsdelivr.net/npm/roslib@1.1.0/build/roslib.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -162,11 +143,6 @@ include "../auth/auth_check.php";
             }
         });
 
-
-        var resolution = 0.05;
-        var offsetX = 385;
-        var offsetY = 38;
-        
         function updateCanvas() {
             var canvas = document.getElementById('mapCanvas');
             if (!canvas) {
@@ -180,6 +156,10 @@ include "../auth/auth_check.php";
             mapImage.onload = function() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(mapImage, 0, 0, canvas.width, canvas.height);
+
+                var resolution = 0.05;
+                var offsetX = 385;
+                var offsetY = 38;
 
                 var robotCanvasX = (robotX / resolution) + offsetX;
                 var robotCanvasY = canvas.height - ((robotY / resolution) + offsetY);
@@ -214,6 +194,10 @@ include "../auth/auth_check.php";
             var infoText = '로봇 현재 위치: X=' + robotX.toFixed(2) + ', Y=' + robotY.toFixed(2);
             additionalInfo.textContent = infoText;
 
+            // 위치 계산
+            var resolution = 0.05;
+            var offsetX = 385;
+            var offsetY = 38;
             var infoLeft = (robotX / resolution) + offsetX + 10; // 왼쪽으로 10px 이동
             var infoTop = canvas.height - ((robotY / resolution) + offsetY) + 10; // 아래로 10px 이동
 
@@ -224,10 +208,11 @@ include "../auth/auth_check.php";
         // 맵 캔버스 요소
         var mapCanvas = document.getElementById('mapCanvas');
 
+
         // 마우스 파라미터(로봇위치와의 오차가 생각보다 크다.)
-        var mouseResolution = 0.0522;
-        var mouseOffsetX = (offsetX - (18));
-        var mouseOffsetY = (offsetY + (14));
+        var mouseResolution = 0.0512;
+        var mouseOffsetX = 375;
+        var mouseOffsetY = 45;
 
         // 마우스가 맵 캔버스 위에 있을 때 이벤트 리스너 추가
         mapCanvas.addEventListener('mousemove', function(e) {
@@ -295,85 +280,6 @@ include "../auth/auth_check.php";
 
             console.log('Goal sent: X=' + goalX + ', Y=' + goalY);
         });
-
-        // 수동 조작을 위한 Twist 메시지 발행
-        var cmdVel = new ROSLIB.Topic({
-            ros: ros,
-            name: '/cmd_vel',
-            messageType: 'geometry_msgs/Twist'
-        });
-
-        var keyState = {};
-
-        document.addEventListener('keydown', function(event) {
-            keyState[event.key] = true;
-            updateMovement();
-            updateKeyboardViewer(); // 키보드 뷰어 업데이트
-        });
-
-        document.addEventListener('keyup', function(event) {
-            keyState[event.key] = false;
-            updateMovement();
-            updateKeyboardViewer(); // 키보드 뷰어 업데이트
-        });
-
-        function updateMovement() {
-            var linear = 0.0;
-            var angular = 0.0;
-
-            if (keyState['ArrowUp']) {
-                linear += 0.25;
-            }
-            if (keyState['ArrowDown']) {
-                linear -= 0.25;
-            }
-            if (keyState['ArrowLeft']) {
-                angular += 0.5;
-            }
-            if (keyState['ArrowRight']) {
-                angular -= 0.5;
-            }
-
-            publishTwist(linear, angular);
-        }
-
-        function publishTwist(linear, angular) {
-            var twist = new ROSLIB.Message({
-                linear: {
-                    x: linear,
-                    y: 0.0,
-                    z: 0.0
-                },
-                angular: {
-                    x: 0.0,
-                    y: 0.0,
-                    z: angular
-                }
-            });
-            cmdVel.publish(twist);
-        }
-
-        // 키보드 뷰어 업데이트 함수
-        function updateKeyboardViewer() {
-            var keyboardViewer = document.getElementById('keyboardViewer');
-            if (!keyboardViewer) return;
-
-            // 키 상태 업데이트
-            var keyUp = keyState['ArrowUp'] ? 'active' : '';
-            var keyDown = keyState['ArrowDown'] ? 'active' : '';
-            var keyLeft = keyState['ArrowLeft'] ? 'active' : '';
-            var keyRight = keyState['ArrowRight'] ? 'active' : '';
-
-            var html = '<h3>키보드 입력 상태</h3>';
-            html += '<ul>';
-            html += '<li class="key-up ' + keyUp + '">↑</li>';
-            html += '<li class="key-down ' + keyDown + '">↓</li>';
-            html += '<li class="key-left ' + keyLeft + '">←</li>';
-            html += '<li class="key-right ' + keyRight + '">→</li>';
-            html += '</ul>';
-
-            keyboardViewer.innerHTML = html;
-        }
     </script>
 </body>
 </html>
